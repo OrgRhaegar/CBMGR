@@ -1,0 +1,4 @@
+#this is ignore file
+bin/
+obj/
+StyleCop.Cache
