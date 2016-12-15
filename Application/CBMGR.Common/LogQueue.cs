@@ -6,6 +6,7 @@
 
 namespace CBMGR.Common
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading;
 
@@ -38,15 +39,46 @@ namespace CBMGR.Common
 
         #region Public methods
         /// <summary>
-        /// Add a log to queue
+        /// Add a log to log queue
         /// </summary>
         /// <param name="log">Log to add</param>
-        public void AddToLogQueue(Log log)
+        public static void AddToLogQueue(Log log)
         {
             lock (logs)
             {
                 logs.Enqueue(log);
             }
+        }
+
+        /// <summary>
+        /// Add a exception to log queue
+        /// </summary>
+        /// <param name="ex">Exception to add</param>
+        public static void AddToLogQueue(Exception ex)
+        {
+            Log log = new Log(ex);
+            AddToLogQueue(log);
+        }
+
+        /// <summary>
+        /// Add a message to log queue
+        /// </summary>
+        /// <param name="msg">Message to add</param>
+        public static void AddToLogQueue(string msg)
+        {
+            Log log = new Log(msg);
+            AddToLogQueue(log);
+        }
+
+        /// <summary>
+        /// Add message and exception to log queue
+        /// </summary>
+        /// <param name="msg">Message to add</param>
+        /// <param name="ex">Exception to add</param>
+        public static void AddToLogQueue(string msg, Exception ex)
+        {
+            Log log = new Log(msg, ex);
+            AddToLogQueue(log);
         }
         #endregion
 
