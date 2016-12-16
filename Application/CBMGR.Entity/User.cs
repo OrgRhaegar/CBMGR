@@ -11,11 +11,12 @@ namespace CBMGR.Entity
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using CBMGR.Ingerface;
 
     /// <summary>
     /// Entity of user
     /// </summary>
-    public class User
+    public class User : IUser
     {
     }
 }
