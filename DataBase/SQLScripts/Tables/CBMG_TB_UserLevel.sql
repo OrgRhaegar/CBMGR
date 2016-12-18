@@ -1,0 +1,20 @@
+/*******************************************
+ * data: 2016-12-10
+ * auth: Rhaegar
+ * desc: User level
+ *******************************************/
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMG_TB_UserLevel')
+ DROP TABLE CBMG_TB_UserLevel
+ GO
+ 
+ CREATE TABLE CBMG_TB_UserLevel
+ (
+ 	[LEVEL_ID] VARCHAR(50) PRIMARY KEY NOT NULL
+ 	,[lEVEL_INDEX] INT NOT NULL DEFAULT 0
+ 	,[LEVEL_NAME] NVARCHAR(50) NOT NULL DEFAULT '∆’Õ®ª·‘±'
+ 	,[BALANCE_RATE] DECIMAL(10, 4) NOT NULL DEFAULT 25.0
+ 	,[COMMENT] NVARCHAR(200) NULL
+ 	,[ENABLED] BIT NOT NULL DEFAULT 1
+ 	,[CREATE_DATE] DATETIME NOT NULL
+ 	,[LAST_MODIFY_DATE] DATETIME NOT NULL
+ )
