@@ -3,11 +3,11 @@
  * auth: Rhaegar
  * desc: User information table
  *******************************************/
- IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMG_TB_UserInfo')
- DROP TABLE CBMG_TB_UserInfo
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMGR_TB_UserInfo')
+ DROP TABLE CBMGR_TB_UserInfo
  GO
  
- CREATE TABLE CBMG_TB_UserInfo
+ CREATE TABLE CBMGR_TB_UserInfo
  (
  	[USER_ID] VARCHAR(50) PRIMARY KEY NOT NULL
  	,[USER_NAME] NVARCHAR(16) NOT NULL

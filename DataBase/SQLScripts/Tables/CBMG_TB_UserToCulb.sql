@@ -3,11 +3,11 @@
  * auth: Rhaegar
  * desc: Relationship between user and club
  *******************************************/
- IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMG_TB_UserToClub')
- DROP TABLE CBMG_TB_UserToClub
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMGR_TB_UserToClub')
+ DROP TABLE CBMGR_TB_UserToClub
  GO
  
- CREATE TABLE CBMG_TB_UserToClub
+ CREATE TABLE CBMGR_TB_UserToClub
  (
  	[ID] NVARCHAR(50) PRIMARY KEY NOT NULL
  	,[USER_ID] VARCHAR(50) NOT NULL

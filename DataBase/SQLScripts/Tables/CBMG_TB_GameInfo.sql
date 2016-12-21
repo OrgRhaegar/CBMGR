@@ -3,11 +3,11 @@
  * auth: Rhaegar
  * desc: Game information table
  *******************************************/
- IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMG_TB_GameInfo')
- DROP TABLE CBMG_TB_GameInfo
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMGR_TB_GameInfo')
+ DROP TABLE CBMGR_TB_GameInfo
  GO
  
- CREATE TABLE CBMG_TB_GameInfo
+ CREATE TABLE CBMGR_TB_GameInfo
  (
  	[GAME_ID] VARCHAR(50) PRIMARY KEY NOT NULL
  	,[CLUB_ID] VARCHAR(50) NOT NULL

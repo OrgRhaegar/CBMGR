@@ -3,11 +3,11 @@
  * auth: Rhaegar
  * desc: User sign up history record.
  *******************************************/
- IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMG_TB_UserSignUpHistory')
- DROP TABLE CBMG_TB_UserSignUpHistory
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMGR_TB_UserSignUpHistory')
+ DROP TABLE CBMGR_TB_UserSignUpHistory
  GO
  
- CREATE TABLE CBMG_TB_UserSignUpHistory
+ CREATE TABLE CBMGR_TB_UserSignUpHistory
  (
  	[HISTORY_ID] VARCHAR(50) PRIMARY KEY NOT NULL
  	,[USER_ID] VARCHAR(50) NOT NULL

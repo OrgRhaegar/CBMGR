@@ -3,11 +3,11 @@
  * auth: Rhaegar
  * desc: User sign up information
  *******************************************/
- IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMG_TB_UserSignUp')
- DROP TABLE CBMG_TB_UserSignUp
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMGR_TB_UserSignUp')
+ DROP TABLE CBMGR_TB_UserSignUp
  GO
  
- CREATE TABLE CBMG_TB_UserSignUp
+ CREATE TABLE CBMGR_TB_UserSignUp
  (
  	[SIGNUP_ID] VARCHAR(50) PRIMARY KEY NOT NULL
  	,[USER_ID] VARCHAR(50) NOT NULL
