@@ -4,11 +4,11 @@
  * desc: Ground info
  *******************************************/
  
- IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME = 'CBMGR_TB_GroundInfo')
- DROP TABLE CBMGR_TB_GroundInfo
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME = 'CM_GroundInfo')
+ DROP TABLE CM_GroundInfo
  GO
  
- CREATE TABLE CBMGR_TB_GroundInfo
+ CREATE TABLE CM_GroundInfo
  (
  	[GROUND_ID] VARCHAR(50) PRIMARY KEY NOT NULL
  	,[CLUB_ID] VARCHAR(50) NOT NULL

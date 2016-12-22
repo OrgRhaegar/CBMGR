@@ -3,11 +3,11 @@
  * auth: Rhaegar
  * desc: User login table
  *******************************************/
- IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMGR_TB_UserLogin')
- DROP TABLE CBMGR_TB_UserLogin
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CM_UserLogin')
+ DROP TABLE CM_UserLogin
  GO
  
- CREATE TABLE CBMGR_TB_UserLogin
+ CREATE TABLE CM_UserLogin
  (
  	[USER_ID] VARCHAR(50) PRIMARY KEY NOT NULL
  	,[USER_LOGIN_NAME] VARCHAR(16) NOT NULL 

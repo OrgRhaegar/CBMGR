@@ -3,11 +3,11 @@
  * auth: Rhaegar
  * desc: User level to ground
  *******************************************/
- IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CBMGR_TB_UserLevelToGround')
- DROP TABLE CBMGR_TB_UserLevelToGround
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CM_UserLevelToGround')
+ DROP TABLE CM_UserLevelToGround
  GO
  
- CREATE TABLE CBMGR_TB_UserLevelToGround
+ CREATE TABLE CM_UserLevelToGround
  (
  	[ID] VARCHAR(50) PRIMARY KEY NOT NULL
  	,[GROUND_ID] VARCHAR(50) NOT NULL
