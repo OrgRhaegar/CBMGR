@@ -1,13 +1,13 @@
 /*******************************************
  * data: 2016-12-21
  * auth: Rhaegar
- * desc: Create a new club
+ * desc: Create a club
  *******************************************/
- IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CM_SP_CreateNewClub')
- DROP PROCEDURE CM_SP_CreateNewClub
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CM_SP_CreateClub')
+ DROP PROCEDURE CM_SP_CreateClub
  GO
  
- CREATE PROCEDURE CM_SP_CreateNewClub
+ CREATE PROCEDURE CM_SP_CreateClub
  @CREATEOT_ID VARCHAR(50)
  ,@CLUB_NAME NVARCHAR(16)
  ,@COMMENT NVARCHAR(200)
