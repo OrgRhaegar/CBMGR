@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMGR.WebApi", "CBMGR.WebAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMGR.Ingerface", "CBMGR.Ingerface\CBMGR.Ingerface.csproj", "{31B157EB-F888-4037-AB45-6E185E7B2F23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMGR.WebModule", "CBMGR.WebModule\CBMGR.WebModule.csproj", "{4B10BC7A-C4B2-42E9-891D-6584829DADF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{31B157EB-F888-4037-AB45-6E185E7B2F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31B157EB-F888-4037-AB45-6E185E7B2F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31B157EB-F888-4037-AB45-6E185E7B2F23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B10BC7A-C4B2-42E9-891D-6584829DADF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B10BC7A-C4B2-42E9-891D-6584829DADF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B10BC7A-C4B2-42E9-891D-6584829DADF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B10BC7A-C4B2-42E9-891D-6584829DADF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
