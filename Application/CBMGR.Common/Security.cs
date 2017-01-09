@@ -10,53 +10,23 @@ namespace CBMGR.Common
     using System.Configuration;
     using System.Security.Cryptography;
     using System.Text;
+    using CBMGR.Ingerface;
 
     /// <summary>
     /// Common security
     /// </summary>
-    public class Security
+    public class Security : ISecurity
     {
-        #region Filed
-        /// <summary>
-        /// Aes key array
-        /// </summary>
-        private byte[] aesKey;
-        #endregion
-
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the Security class.
         /// </summary>
         public Security()
         {
-            string key = ConfigurationManager.AppSettings["AesKey"];
-            if (string.IsNullOrEmpty(key))
-            {
-                throw new Exception("Can not find aes key.");
-            }
-            else if (key.Length != 16 || key.Length != 24 || key.Length != 32)
-            {
-                throw new Exception("The lengh of aes key is incorrect.");
-            }
-
-            this.aesKey = Encoding.UTF8.GetBytes(key);
         }
         #endregion
 
-        #region Property
-        /// <summary>
-        /// Gets aes key array
-        /// </summary>
-        private byte[] AesKeyArray
-        {
-            get
-            {
-                return this.aesKey;
-            }
-        }
-        #endregion
-
-        #region Public method
+        #region ISecurity
         /// <summary>
         /// MD5 Encrypt
         /// </summary>
@@ -110,10 +80,40 @@ namespace CBMGR.Common
         private RijndaelManaged GetAesProvider()
         {
             RijndaelManaged aes = new RijndaelManaged();
-            aes.Key = this.AesKeyArray;
+            aes.Key = this.GetAseKey();
             aes.Mode = CipherMode.ECB;
             aes.Padding = PaddingMode.PKCS7;
             return aes;
+        }
+
+        /// <summary>
+        /// Get ask key array
+        /// </summary>
+        /// <returns>key array</returns>
+        private byte[] GetAseKey()
+        {
+            byte[] keyBytes;
+            try
+            {
+                string key = ConfigurationManager.AppSettings["AesKey"];
+                if (string.IsNullOrEmpty(key))
+                {
+                    throw new Exception("Can not find aes key.");
+                }
+                else if (key.Length != 16 || key.Length != 24 || key.Length != 32)
+                {
+                    throw new Exception("The lengh of aes key is incorrect.");
+                }
+
+                keyBytes = Encoding.UTF8.GetBytes(key);
+            }
+            catch (Exception ex)
+            {
+                LogQueue.AddToLogQueue(ex);
+                keyBytes = null;
+            }
+
+            return keyBytes;
         }
         #endregion
     }
