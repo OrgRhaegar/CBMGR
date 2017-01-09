@@ -10,7 +10,7 @@ namespace CBMGR.Entity
     using System.Data;
     using System.Data.SqlClient;
     using CBMGR.Common;
-    using CBMGR.Ingerface;
+    using CBMGR.Interface;
 
     /// <summary>
     /// Entity of user

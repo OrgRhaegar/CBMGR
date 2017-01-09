@@ -9,11 +9,12 @@ namespace CBMGR.Common
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using CBMGR.Interface;
 
     /// <summary>
     /// Database operator
     /// </summary>
-    public class Dbi
+    public class Dbi : IDBHelper
     {
         #region Constructor
         /// <summary>
@@ -24,7 +25,7 @@ namespace CBMGR.Common
         }
         #endregion
 
-        #region Pulbic methods
+        #region IDBHelper
         /// <summary>
         /// Test SQL connecion.
         /// </summary>

@@ -10,7 +10,7 @@ namespace CBMGR.Common
     using System.Configuration;
     using System.Security.Cryptography;
     using System.Text;
-    using CBMGR.Ingerface;
+    using CBMGR.Interface;
 
     /// <summary>
     /// Common security
