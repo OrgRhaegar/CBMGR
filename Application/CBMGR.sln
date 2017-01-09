@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{44D0B3C3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMGR.Entity", "CBMGR.Entity\CBMGR.Entity.csproj", "{E8E6FF0E-4103-4703-9A0D-76A61263DFDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMRG.Tools.HttpRequestTool", "CBMGR.Tools.HttpRequestTool\CBMRG.Tools.HttpRequestTool.csproj", "{436A7E53-92B8-4ED3-B8E2-548B46E216A0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMGR.Common", "CBMGR.Common\CBMGR.Common.csproj", "{33173173-4FDD-4FE0-9684-54161353D3B3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMGR.WebApi", "CBMGR.WebApi\CBMGR.WebApi.csproj", "{72C70E34-A7AF-429A-9F6B-3A05F4D30882}"
@@ -16,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMGR.WebModule", "CBMGR.WebModule\CBMGR.WebModule.csproj", "{4B10BC7A-C4B2-42E9-891D-6584829DADF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMGR.Interface", "CBMGR.Interface\CBMGR.Interface.csproj", "{31B157EB-F888-4037-AB45-6E185E7B2F23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMRG.Tools.HttpRequestTool", "Tools\CBMGR.Tools.HttpRequestTool\CBMRG.Tools.HttpRequestTool.csproj", "{436A7E53-92B8-4ED3-B8E2-548B46E216A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityTest", "Tools\UnityTest\UnityTest.csproj", "{15AD3185-DEDF-4C23-BE12-4858B64F6BB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +29,6 @@ Global
 		{E8E6FF0E-4103-4703-9A0D-76A61263DFDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8E6FF0E-4103-4703-9A0D-76A61263DFDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8E6FF0E-4103-4703-9A0D-76A61263DFDE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{436A7E53-92B8-4ED3-B8E2-548B46E216A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{436A7E53-92B8-4ED3-B8E2-548B46E216A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{436A7E53-92B8-4ED3-B8E2-548B46E216A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{436A7E53-92B8-4ED3-B8E2-548B46E216A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{33173173-4FDD-4FE0-9684-54161353D3B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{33173173-4FDD-4FE0-9684-54161353D3B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33173173-4FDD-4FE0-9684-54161353D3B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,11 +45,20 @@ Global
 		{31B157EB-F888-4037-AB45-6E185E7B2F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31B157EB-F888-4037-AB45-6E185E7B2F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31B157EB-F888-4037-AB45-6E185E7B2F23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{436A7E53-92B8-4ED3-B8E2-548B46E216A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{436A7E53-92B8-4ED3-B8E2-548B46E216A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{436A7E53-92B8-4ED3-B8E2-548B46E216A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{436A7E53-92B8-4ED3-B8E2-548B46E216A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15AD3185-DEDF-4C23-BE12-4858B64F6BB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15AD3185-DEDF-4C23-BE12-4858B64F6BB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15AD3185-DEDF-4C23-BE12-4858B64F6BB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15AD3185-DEDF-4C23-BE12-4858B64F6BB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{436A7E53-92B8-4ED3-B8E2-548B46E216A0} = {44D0B3C3-2CA1-419E-BCC1-F0D789243445}
+		{15AD3185-DEDF-4C23-BE12-4858B64F6BB7} = {44D0B3C3-2CA1-419E-BCC1-F0D789243445}
 	EndGlobalSection
 EndGlobal
