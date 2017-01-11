@@ -10,7 +10,7 @@ namespace CBMGR.Common
     using System.Configuration;
     using System.Security.Cryptography;
     using System.Text;
-    using CBMGR.Ingerface;
+    using CBMGR.Interface;
 
     /// <summary>
     /// Common security
@@ -100,7 +100,7 @@ namespace CBMGR.Common
                 {
                     throw new Exception("Can not find aes key.");
                 }
-                else if (key.Length != 16 || key.Length != 24 || key.Length != 32)
+                else if (key.Length != 32)
                 {
                     throw new Exception("The lengh of aes key is incorrect.");
                 }
