@@ -4,3 +4,4 @@ obj/
 StyleCop.Cache
 !/Application/CBMGR.WebModule/bin
 !/Application/CBMGR.WebModule/pages/bin
+CBMGR.Lib/
