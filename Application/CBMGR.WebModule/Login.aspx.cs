@@ -7,13 +7,10 @@
 namespace CBMGR.WebModule
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
     using System.Web.UI;
-    using System.Web.UI.WebControls;
-    using CBMGR.Interface;
     using CBMGR.Common;
+    using CBMGR.Interface;
+    using Microsoft.Practices.Unity;
 
     /// <summary>
     /// Login page
@@ -48,6 +45,8 @@ namespace CBMGR.WebModule
         {
             string userName = this.txtUserName.Text.Trim();
             string pwd = this.txtPwd.Text.Trim();
+            IUser user = GlobalConfig.IocContainer.Resolve<IUser>();
+            string userid = user.CreateNewUser(userName, pwd);
         }
         #endregion
     }
