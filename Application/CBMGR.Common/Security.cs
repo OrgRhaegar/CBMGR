@@ -7,7 +7,6 @@
 namespace CBMGR.Common
 {
     using System;
-    using System.Configuration;
     using System.Security.Cryptography;
     using System.Text;
     using CBMGR.Interface;
@@ -95,7 +94,7 @@ namespace CBMGR.Common
             byte[] keyBytes;
             try
             {
-                string key = ConfigurationManager.AppSettings["AesKey"];
+                string key = GlobalConfig.GlobalPars["AesKey"];
                 if (string.IsNullOrEmpty(key))
                 {
                     throw new Exception("Can not find aes key.");
