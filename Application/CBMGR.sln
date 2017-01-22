@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBMRG.Tools.HttpRequestTool
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityTest", "Tools\UnityTest\UnityTest.csproj", "{15AD3185-DEDF-4C23-BE12-4858B64F6BB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateRandomKey", "CreateRandomKey\CreateRandomKey.csproj", "{E0BCFEF9-F838-4B4C-86A9-0FC1FE8460C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateRandomKey", "Tools\CreateRandomKey\CreateRandomKey.csproj", "{E0BCFEF9-F838-4B4C-86A9-0FC1FE8460C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
