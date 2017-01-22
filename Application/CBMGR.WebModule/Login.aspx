@@ -28,11 +28,16 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td colspan="2">
                     <asp:CheckBox ID="ckbRememberMe" runat="server" Checked="false" Text="Remember me" />
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <asp:Button ID="btnLogin" runat="server" OnClick="btnLogin_Click" Text="Log in" />
+                </td>
+                <td>
+                    <asp:Button ID="btnRegist" runat="server" OnClick="btnRegist_Click" Text="Register" />
                 </td>
             </tr>
         </table>
