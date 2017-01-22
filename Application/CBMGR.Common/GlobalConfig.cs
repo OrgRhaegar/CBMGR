@@ -9,6 +9,8 @@ namespace CBMGR.Common
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration;
+    using Microsoft.Practices.Unity;
+    using Microsoft.Practices.Unity.Configuration;
 
     /// <summary>
     /// Global config
@@ -17,22 +19,56 @@ namespace CBMGR.Common
     {
         #region Fileds
         /// <summary>
-        /// Dictionary of global settings.
+        /// Dictionary of global settings
         /// </summary>
-        public static readonly Dictionary<string, string> GlobalPars;
+        private static Dictionary<string, string> globalPars;
+
+        /// <summary>
+        /// IOC container
+        /// </summary>
+        private static IUnityContainer iocContainer;
         #endregion
 
-        #region Constructor
+        #region Property
         /// <summary>
-        /// Initializes static members of the GlobalConfig class.
+        /// Gets dictionary of global settings
         /// </summary>
-        static GlobalConfig()
+        public static Dictionary<string, string> GlobalPars
         {
-            GlobalPars = new Dictionary<string, string>();
-            NameValueCollection settings = ConfigurationManager.AppSettings;
-            foreach (string key in settings.AllKeys)
+            get
             {
-                GlobalPars.Add(key, settings[key]);
+                if (globalPars == null)
+                {
+                    globalPars = new Dictionary<string, string>();
+                    NameValueCollection settings = ConfigurationManager.AppSettings;
+                    foreach (string key in settings.AllKeys)
+                    {
+                        globalPars.Add(key, settings[key]);
+                    }
+                }
+
+                return globalPars;
+            }
+        }
+
+        /// <summary>
+        /// Gets IOC container
+        /// </summary>
+        public static IUnityContainer IocContainer
+        {
+            get
+            {
+                if (iocContainer == null)
+                {
+                    ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
+                    fileMap.ExeConfigFilename = "ioc.config";
+                    Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+                    UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection("unity");
+                    iocContainer = new UnityContainer();
+                    iocContainer.LoadConfiguration(section);
+                }
+
+                return iocContainer;
             }
         }
         #endregion
