@@ -11,6 +11,7 @@ namespace CBMGR.Entity
     using System.Data.SqlClient;
     using CBMGR.Common;
     using CBMGR.Interface;
+    using Microsoft.Practices.Unity;
 
     /// <summary>
     /// Entity of user
@@ -29,7 +30,7 @@ namespace CBMGR.Entity
             string userId = string.Empty;
             try
             {
-                Security sec = new Security();
+                ISecurity sec = GlobalConfig.IocContainer.Resolve<ISecurity>();
                 password = sec.GetMD5String(password);
                 string sql = "EXEC CBMG_SP_CreateNewUser @LOGIN_NAME=@NAME,@LOGIN_PWD=@PWD";
                 SqlParameter[] parArray = new SqlParameter[2];
