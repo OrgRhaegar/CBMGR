@@ -22,11 +22,6 @@ namespace CBMGR.Common
         /// Dictionary of global settings
         /// </summary>
         private static Dictionary<string, string> globalPars;
-
-        /// <summary>
-        /// IOC container
-        /// </summary>
-        private static IUnityContainer iocContainer;
         #endregion
 
         #region Property
@@ -58,16 +53,12 @@ namespace CBMGR.Common
         {
             get
             {
-                if (iocContainer == null)
-                {
-                    ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
-                    fileMap.ExeConfigFilename = "ioc.config";
-                    Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
-                    UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection("unity");
-                    iocContainer = new UnityContainer();
-                    iocContainer.LoadConfiguration(section);
-                }
-
+                ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
+                fileMap.ExeConfigFilename = GlobalPars["IOCMappingFile"];
+                Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+                UnityConfigurationSection section = (UnityConfigurationSection)configuration.GetSection("unity");
+                IUnityContainer iocContainer = new UnityContainer();
+                iocContainer.LoadConfiguration(section);
                 return iocContainer;
             }
         }
