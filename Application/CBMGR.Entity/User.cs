@@ -36,7 +36,7 @@ namespace CBMGR.Entity
                 SqlParameter[] parArray = new SqlParameter[2];
                 parArray[0] = new SqlParameter("@NAME", loginName);
                 parArray[1] = new SqlParameter("@PWD", password);
-                Dbi dbi = new Dbi();
+                IDBHelper dbi = GlobalConfig.IocContainer.Resolve<IDBHelper>();
                 DataTable result = dbi.GetDataTable(sql, parArray);
                 userId = result.Rows[0]["MSG"].ToString();
             }
@@ -65,7 +65,28 @@ namespace CBMGR.Entity
         /// <returns>Club list</returns>
         public string UserLogin(string loginName, string password)
         {
-            throw new NotImplementedException();
+            string userId = string.Empty;
+            try
+            {
+                ISecurity sec = GlobalConfig.IocContainer.Resolve<ISecurity>();
+                password = sec.GetMD5String(password);
+                string sql = "SELECT USER_ID FROM CM_UserLogin WHERE USER_LOGIN_NAME=@NAME AND USER_LOGIN_PWD=@PWD AND ENABLED=1";
+                SqlParameter[] parArray = new SqlParameter[2];
+                parArray[0] = new SqlParameter("@NAME", loginName);
+                parArray[1] = new SqlParameter("@PWD", password);
+                IDBHelper dbi = GlobalConfig.IocContainer.Resolve<IDBHelper>();
+                object id = dbi.ExecuteScalar(sql, parArray);
+                if (id != null)
+                {
+                    userId = id.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogQueue.AddToLogQueue(ex);
+            }
+
+            return userId;
         }
         #endregion
     }
