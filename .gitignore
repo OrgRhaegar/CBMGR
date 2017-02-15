@@ -1,6 +1,7 @@
 #this is ignore file
 bin/
 obj/
+Application/CBMGR.Lib/
 StyleCop.Cache
 .pdb
 !/Application/CBMGR.WebModule/bin
