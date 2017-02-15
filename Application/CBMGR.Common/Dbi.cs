@@ -154,11 +154,18 @@ namespace CBMGR.Common
         /// <returns>Result data set</returns>
         public DataSet GetDataSet(string sql, SqlParameter[] parameters = null)
         {
-            DataSet result = null;
-            using (SqlCommand com = this.CreateCommand(sql, parameters))
+            DataSet result = new DataSet();
+            using (SqlConnection con = this.CreateConnection())
             {
                 try
                 {
+                    SqlCommand com = con.CreateCommand();
+                    com.CommandText = sql;
+                    if (parameters != null)
+                    {
+                        com.Parameters.AddRange(parameters);
+                    }
+
                     SqlDataAdapter sda = new SqlDataAdapter(com);
                     sda.Fill(result);
                 }
@@ -198,35 +205,6 @@ namespace CBMGR.Common
             }
 
             return con;
-        }
-
-        /// <summary>
-        /// Create a instance of sql command.
-        /// </summary>
-        /// <param name="sql">sql command</param>
-        /// <param name="parArray">Sql parameter array. Null for default.</param>
-        /// <returns>New command</returns>
-        private SqlCommand CreateCommand(string sql, SqlParameter[] parArray = null)
-        {
-            SqlCommand com = null;
-            using (SqlConnection con = this.CreateConnection())
-            {
-                try
-                {
-                    com = con.CreateCommand();
-                    com.CommandText = sql;
-                    if (parArray != null)
-                    {
-                        com.Parameters.AddRange(parArray);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LogQueue.AddToLogQueue(ex);
-                }
-            }
-
-            return com;
         }
         #endregion
     }
