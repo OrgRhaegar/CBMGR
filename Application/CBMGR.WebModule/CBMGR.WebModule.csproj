@@ -47,6 +47,9 @@
     <Reference Include="CBMGR.Common">
       <HintPath>..\CBMGR.Lib\CBMGR.Common.dll</HintPath>
     </Reference>
+    <Reference Include="CBMGR.Entity">
+      <HintPath>..\CBMGR.Lib\CBMGR.Entity.dll</HintPath>
+    </Reference>
     <Reference Include="CBMGR.Interface">
       <HintPath>..\CBMGR.Lib\CBMGR.Interface.dll</HintPath>
     </Reference>
