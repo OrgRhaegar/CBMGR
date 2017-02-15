@@ -99,6 +99,53 @@ namespace CBMGR.Common
         }
 
         /// <summary>
+        /// Execute scalar sql query.
+        /// </summary>
+        /// <param name="sql">sql command</param>
+        /// <param name="parameter">slq parameter array. Null fro default.</param>
+        /// <returns>Query result</returns>
+        public object ExecuteScalar(string sql, SqlParameter parameter)
+        {
+            SqlParameter[] parArray = new SqlParameter[] { parameter };
+            object queryResult = this.ExecuteScalar(sql, parArray);
+            return queryResult;
+        }
+
+        /// <summary>
+        /// Execute scalar sql query.
+        /// </summary>
+        /// <param name="sql">sql command</param>
+        /// <param name="parameters">slq parameter array. Null fro default.</param>
+        /// <returns>Query result</returns>
+        public object ExecuteScalar(string sql, SqlParameter[] parameters = null)
+        {
+            object queryResult = -1;
+            using (SqlConnection con = this.CreateConnection())
+            {
+                try
+                {
+                    SqlCommand command = con.CreateCommand();
+                    command.CommandText = sql;
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+
+                    con.Open();
+                    queryResult = command.ExecuteScalar();
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    Log log = new Log(ex);
+                    LogQueue.AddToLogQueue(log);
+                }
+            }
+
+            return queryResult;
+        }
+
+        /// <summary>
         /// Get data table
         /// </summary>
         /// <param name="sql">sql command</param>

@@ -37,6 +37,22 @@ namespace CBMGR.Interface
         int ExecuteNoneQuery(string sql, SqlParameter[] parameters = null);
 
         /// <summary>
+        /// Execute scalar sql query.
+        /// </summary>
+        /// <param name="sql">sql command</param>
+        /// <param name="parameter">slq parameter array. Null fro default.</param>
+        /// <returns>Query result</returns>
+        object ExecuteScalar(string sql, SqlParameter parameter);
+
+        /// <summary>
+        /// Execute scalar sql query.
+        /// </summary>
+        /// <param name="sql">sql command</param>
+        /// <param name="parameters">slq parameter array. Null fro default.</param>
+        /// <returns>Query result</returns>
+        object ExecuteScalar(string sql, SqlParameter[] parameters = null);
+
+        /// <summary>
         /// Get data table
         /// </summary>
         /// <param name="sql">sql command</param>
