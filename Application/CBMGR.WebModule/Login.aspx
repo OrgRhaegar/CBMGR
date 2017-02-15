@@ -41,6 +41,9 @@
                 </td>
             </tr>
         </table>
+        <span id="spId">
+            User ID:<asp:Label ID="lbUserId" runat="server" />
+        </span>
     </div>
     </form>
 </body>
