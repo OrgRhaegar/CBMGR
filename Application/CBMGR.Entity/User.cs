@@ -32,7 +32,7 @@ namespace CBMGR.Entity
             {
                 ISecurity sec = GlobalConfig.IocContainer.Resolve<ISecurity>();
                 password = sec.GetMD5String(password);
-                string sql = "EXEC CBMG_SP_CreateNewUser @LOGIN_NAME=@NAME,@LOGIN_PWD=@PWD";
+                string sql = "EXEC CM_SP_CreateNewUser @LOGIN_NAME=@NAME,@LOGIN_PWD=@PWD";
                 SqlParameter[] parArray = new SqlParameter[2];
                 parArray[0] = new SqlParameter("@NAME", loginName);
                 parArray[1] = new SqlParameter("@PWD", password);
