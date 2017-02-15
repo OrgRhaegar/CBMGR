@@ -71,7 +71,7 @@ namespace CBMGR.Common
         public void Write()
         {
             string logFiel = GlobalConfig.GlobalPars["LogFile"];
-            using (FileStream fs = new FileStream(logFiel, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(logFiel, FileMode.Append))
             {
                 StreamWriter sw = new StreamWriter(fs, Encoding.UTF8);
                 sw.WriteLine("Date:{0}", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
