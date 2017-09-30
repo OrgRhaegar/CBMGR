@@ -22,7 +22,7 @@ namespace CBMGR.Interface
             this.Result = true;
             this.ResultValue = 0;
             this.Message = string.Empty;
-            this.Ex = new Exception();
+            this.Ex = null;
         }
 
         /// <summary>
