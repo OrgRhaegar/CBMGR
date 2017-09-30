@@ -25,11 +25,11 @@ namespace UnityTest
             container.LoadConfiguration(section);
 
             try
-            {   
-                ISecurity iSecurity = container.Resolve<ISecurity>();
-                string pwd = "1a2b3c4d";
-                pwd = iSecurity.GetAesEncryptedString(pwd);
-                Console.WriteLine(pwd);
+            {
+                IUser iUSer = container.Resolve<IUser>();
+                ActionResult login = iUSer.UserLogin("admin", "admin");
+                string resultJosn = login.ToJSON();
+                Console.WriteLine(resultJosn);
             }
             catch (Exception ex)
             {

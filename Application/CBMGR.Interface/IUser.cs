@@ -24,7 +24,7 @@ namespace CBMGR.Interface
         /// <param name="loginName">login name</param>
         /// <param name="password">login password</param>
         /// <returns>user guid</returns>
-        string CreateNewUser(string loginName, string password);
+        ActionResult CreateNewUser(string loginName, string password);
 
         /// <summary>
         /// Sign in as a exist user.
@@ -32,7 +32,7 @@ namespace CBMGR.Interface
         /// <param name="loginName">login name</param>
         /// <param name="password">login password</param>
         /// <returns>user guid</returns>
-        string UserLogin(string loginName, string password);
+        ActionResult UserLogin(string loginName, string password);
 
         /// <summary>
         /// Get club list of current user.

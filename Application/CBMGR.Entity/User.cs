@@ -25,9 +25,9 @@ namespace CBMGR.Entity
         /// <param name="loginName">login name</param>
         /// <param name="password">login password</param>
         /// <returns>user guid</returns>
-        public string CreateNewUser(string loginName, string password)
+        public ActionResult CreateNewUser(string loginName, string password)
         {
-            string userId = string.Empty;
+            ActionResult result = new ActionResult();
             try
             {
                 ISecurity sec = GlobalConfig.IocContainer.Resolve<ISecurity>();
@@ -37,15 +37,19 @@ namespace CBMGR.Entity
                 parArray[0] = new SqlParameter("@NAME", loginName);
                 parArray[1] = new SqlParameter("@PWD", password);
                 IDBHelper dbi = GlobalConfig.IocContainer.Resolve<IDBHelper>();
-                DataTable result = dbi.GetDataTable(sql, parArray);
-                userId = result.Rows[0]["MSG"].ToString();
+                DataTable newUser = dbi.GetDataTable(sql, parArray);
+                result.ResultValue = newUser;
+                result.Result = (int)newUser.Rows[0]["RESULT"] == 1;
+                result.Message = newUser.Rows[0]["MSG"].ToString();
             }
             catch (Exception ex)
             {
+                result.Result = false;
+                result.Ex = ex;
                 LogQueue.AddToLogQueue(ex);
             }
 
-            return userId;
+            return result;
         }
         
         /// <summary>
@@ -63,9 +67,9 @@ namespace CBMGR.Entity
         /// Get club list of current user.
         /// </summary>
         /// <returns>Club list</returns>
-        public string UserLogin(string loginName, string password)
+        public ActionResult UserLogin(string loginName, string password)
         {
-            string userId = string.Empty;
+            ActionResult result = new ActionResult();
             try
             {
                 ISecurity sec = GlobalConfig.IocContainer.Resolve<ISecurity>();
@@ -78,15 +82,21 @@ namespace CBMGR.Entity
                 object id = dbi.ExecuteScalar(sql, parArray);
                 if (id != null)
                 {
-                    userId = id.ToString();
+                    result.ResultValue = id.ToString();
+                }
+                else
+                {
+                    result.Result = false;
                 }
             }
             catch (Exception ex)
             {
+                result.Result = false;
+                result.Ex = ex;
                 LogQueue.AddToLogQueue(ex);
             }
 
-            return userId;
+            return result;
         }
         #endregion
     }

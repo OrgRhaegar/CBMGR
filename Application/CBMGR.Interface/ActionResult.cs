@@ -7,12 +7,24 @@
 namespace CBMGR.Interface
 {
     using System;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Common action result of method.
     /// </summary>
     public class ActionResult
     {
+        /// <summary>
+        /// Initializes a new instance of the ActionResult class.
+        /// </summary>
+        public ActionResult()
+        {
+            this.Result = true;
+            this.ResultValue = 0;
+            this.Message = string.Empty;
+            this.Ex = new Exception();
+        }
+
         /// <summary>
         /// Gets or sets a value indicating whether calling of method is success.
         /// </summary>
@@ -32,5 +44,15 @@ namespace CBMGR.Interface
         /// Gets or sets exception of method calling.
         /// </summary>
         public Exception Ex { get; set; }
+
+        /// <summary>
+        /// Get json string of this entity
+        /// </summary>
+        /// <returns>Json string of this entity.</returns>
+        public string ToJSON()
+        {
+            string jsonStr = JsonConvert.SerializeObject(this);
+            return jsonStr;
+        }
     }
 }
