@@ -51,14 +51,13 @@ namespace CBMGR.Entity
 
             return result;
         }
-        
+
         /// <summary>
         /// Sign in as a exist user.
         /// </summary>
-        /// <param name="loginName">login name</param>
-        /// <param name="password">login password</param>
-        /// <returns>user guid</returns>
-        public DataTable GetClubList()
+        /// <param name="userId">User Id</param>
+        /// <returns>Clubs that this user belongs to.</returns>
+        public ActionResult GetClubListByUserId(string userId)
         {
             throw new NotImplementedException();
         }
@@ -82,7 +81,9 @@ namespace CBMGR.Entity
                 object id = dbi.ExecuteScalar(sql, parArray);
                 if (id != null)
                 {
-                    result.ResultValue = id.ToString();
+                    string userId = id.ToString();
+                    LoginToken token = new LoginToken(userId);
+                    result.ResultValue = token.GetToken();
                 }
                 else
                 {

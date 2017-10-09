@@ -35,9 +35,10 @@ namespace CBMGR.Interface
         ActionResult UserLogin(string loginName, string password);
 
         /// <summary>
-        /// Get club list of current user.
+        /// Get club list of a user.
         /// </summary>
-        /// <returns>Club list</returns>
-        DataTable GetClubList();
+        /// <param name="userId">User Id</param>
+        /// <returns>Clubs that this user belongs to.</returns>
+        ActionResult GetClubListByUserId(string userId);
     }
 }

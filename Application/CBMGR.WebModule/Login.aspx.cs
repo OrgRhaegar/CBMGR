@@ -46,8 +46,8 @@ namespace CBMGR.WebModule
             string userName = this.txtUserName.Text.Trim();
             string pwd = this.txtPwd.Text.Trim();
             IUser user = GlobalConfig.IocContainer.Resolve<IUser>();
-            string userid = user.CreateNewUser(userName, pwd);
-            this.lbUserId.Text = userid;
+            ActionResult login = user.UserLogin(userName, pwd);
+            this.lbUserId.Text = login.Result.ToString();
         }
         #endregion
     }
