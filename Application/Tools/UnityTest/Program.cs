@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using CBMGR.Interface;
+using CBMGR.Entity;
 using CBMGR.Common;
+using Newtonsoft.Json;
 
 namespace UnityTest
 {
@@ -30,6 +32,7 @@ namespace UnityTest
                 ActionResult login = iUSer.UserLogin("admin", "admin");
                 string resultJosn = login.ToJSON();
                 Console.WriteLine(resultJosn);
+                VerifyToken(resultJosn);
             }
             catch (Exception ex)
             {
@@ -37,6 +40,13 @@ namespace UnityTest
             }
 
             Console.ReadKey();
+        }
+
+        private static void VerifyToken(string jStr)
+        {
+            ActionResult result =  JsonConvert.DeserializeObject<ActionResult>(jStr);
+            bool verify = LoginToken.VerifyToken(result.ResultValue.ToString());
+            Console.WriteLine("Verify result: {0}", verify);
         }
     }
 }

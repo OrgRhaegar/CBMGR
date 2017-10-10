@@ -65,15 +65,15 @@ namespace CBMGR.Entity
         }
 
         /// <summary>
-        /// Gets a value wether this token is expired.
+        /// Gets a value wether this token is valid.
         /// </summary>
-        public bool IsExpire
+        public bool IsValid
         {
             get
             {
                 int sec = Convert.ToInt32(GlobalConfig.GlobalPars["Expire"]);
-                DateTime expDate = DateTime.Now.AddSeconds(sec);
-                return expDate > this.CreateDate;
+                DateTime expDate = this.createDate.AddSeconds(sec);
+                return expDate > DateTime.Now;
             }
         }
 
@@ -93,7 +93,7 @@ namespace CBMGR.Entity
         /// <returns></returns>
         public string GetToken()
         {
-            if (this.IsExpire)
+            if (!this.IsValid)
             {
                 return string.Empty;
             }
@@ -120,8 +120,9 @@ namespace CBMGR.Entity
                 IUnityContainer container = GlobalConfig.IocContainer;
                 ISecurity iSecurity = container.Resolve<ISecurity>();
                 tokenStr = iSecurity.GetAesDecryptedString(tokenStr);
-                LoginToken token = (LoginToken)JsonConvert.DeserializeObject(tokenStr);
-                verify = token.IsExpire;
+                LoginToken token = JsonConvert.DeserializeObject<LoginToken>(tokenStr);
+                verify = token.IsValid;
+
             }
             catch (Exception ex)
             {
