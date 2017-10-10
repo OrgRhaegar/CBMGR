@@ -45,7 +45,6 @@ namespace CBMGR.Entity
             catch (Exception ex)
             {
                 result.Result = false;
-                result.Ex = ex;
                 LogQueue.AddToLogQueue(ex);
             }
 
@@ -93,7 +92,6 @@ namespace CBMGR.Entity
             catch (Exception ex)
             {
                 result.Result = false;
-                result.Ex = ex;
                 LogQueue.AddToLogQueue(ex);
             }
 

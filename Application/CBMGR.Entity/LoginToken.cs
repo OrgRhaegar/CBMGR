@@ -7,10 +7,6 @@
 namespace CBMGR.Entity
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using CBMGR.Common;
     using CBMGR.Interface;
     using Microsoft.Practices.Unity;
@@ -21,6 +17,7 @@ namespace CBMGR.Entity
     /// </summary>
     public class LoginToken
     {
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the LoginToken class.
         /// <param name="userId">User id</param>
@@ -30,8 +27,11 @@ namespace CBMGR.Entity
         {
             this.userId = userId;
             this.createDate = DateTime.Now;
+            this.updateCount = 0;
         }
+        #endregion
 
+        #region Property
         /// <summary>
         /// User id.
         /// </summary>
@@ -78,6 +78,24 @@ namespace CBMGR.Entity
         }
 
         /// <summary>
+        /// Count of this token updating time.
+        /// </summary>
+        private int updateCount;
+
+        /// <summary>
+        /// Gets a value of update count.
+        /// </summary>
+        public int UpdateCount
+        {
+            get
+            {
+                return this.updateCount;
+            }
+        }
+        #endregion
+
+        #region Pulbic method
+        /// <summary>
         /// Get json string of this entity
         /// </summary>
         /// <returns>Json string of this entity.</returns>
@@ -106,7 +124,9 @@ namespace CBMGR.Entity
                 return token;
             }
         }
+        #endregion
 
+        #region Static method
         /// <summary>
         /// Verify token string.
         /// </summary>
@@ -122,7 +142,6 @@ namespace CBMGR.Entity
                 tokenStr = iSecurity.GetAesDecryptedString(tokenStr);
                 LoginToken token = JsonConvert.DeserializeObject<LoginToken>(tokenStr);
                 verify = token.IsValid;
-
             }
             catch (Exception ex)
             {
@@ -131,5 +150,46 @@ namespace CBMGR.Entity
 
             return verify;
         }
+
+        /// <summary>
+        /// Prolong token's period of validity.
+        /// Number of updating times must less then 10.
+        /// </summary>
+        /// <param name="totokenStrken">Original token.</param>
+        /// <returns>Update result.</returns>
+        public static ActionResult UpdateToken(string tokenStr)
+        {
+            ActionResult result = new ActionResult();
+            result.Result = false;
+            try
+            {
+                IUnityContainer container = GlobalConfig.IocContainer;
+                ISecurity iSecurity = container.Resolve<ISecurity>();
+                tokenStr = iSecurity.GetAesDecryptedString(tokenStr);
+                LoginToken token = JsonConvert.DeserializeObject<LoginToken>(tokenStr);
+                if (string.IsNullOrEmpty(token.UserId))
+                {
+                    result.Message = "Validation of token failed.";
+                }
+                else if (token.UpdateCount > 9)
+                {
+                    result.Message = "This token can not be updated anymore.";
+                }
+                else
+                {
+                    result.Result = true;
+                    token.createDate = DateTime.Now;
+                    token.updateCount++;
+                    result.ResultValue = token.GetToken();
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = "Validation of token failed.";
+            }
+
+            return result;
+        }
+        #endregion
     }
 }
