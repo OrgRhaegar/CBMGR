@@ -22,7 +22,6 @@ namespace CBMGR.Interface
             this.Result = true;
             this.ResultValue = 0;
             this.Message = string.Empty;
-            this.Ex = null;
         }
 
         /// <summary>
@@ -39,11 +38,6 @@ namespace CBMGR.Interface
         /// Gets or sets addtional message of method calling.
         /// </summary>
         public string Message { get; set; }
-
-        /// <summary>
-        /// Gets or sets exception of method calling.
-        /// </summary>
-        public Exception Ex { get; set; }
 
         /// <summary>
         /// Get json string of this entity

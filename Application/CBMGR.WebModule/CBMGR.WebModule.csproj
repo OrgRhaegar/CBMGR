@@ -45,11 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CBMGR.Common">
+    <Reference Include="CBMGR.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CBMGR.Lib\CBMGR.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="CBMGR.Entity">
-      <HintPath>..\CBMGR.Lib\CBMGR.Entity.dll</HintPath>
     </Reference>
     <Reference Include="CBMGR.Interface">
       <HintPath>..\CBMGR.Lib\CBMGR.Interface.dll</HintPath>

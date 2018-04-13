@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Unity;
-using Microsoft.Practices.Unity.Configuration;
 using CBMGR.Interface;
-using CBMGR.Common;
+using CBMGR.Entity;
+using Microsoft.Practices.Unity.Configuration;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Unity;
 
 namespace UnityTest
 {
@@ -30,6 +31,8 @@ namespace UnityTest
                 ActionResult login = iUSer.UserLogin("admin", "admin");
                 string resultJosn = login.ToJSON();
                 Console.WriteLine(resultJosn);
+                VerifyToken(resultJosn);
+                UpdateToken(resultJosn);
             }
             catch (Exception ex)
             {
@@ -37,6 +40,22 @@ namespace UnityTest
             }
 
             Console.ReadKey();
+        }
+
+        private static void VerifyToken(string jStr)
+        {
+            JObject result =  JsonConvert.DeserializeObject<JObject>(jStr);
+            string token = result["ResultValue"].ToString();
+            bool verify = LoginToken.VerifyToken(token);
+            Console.WriteLine("Verify result: {0}", verify);
+        }
+
+        private static void UpdateToken(string jStr)
+        {
+            JObject result = JsonConvert.DeserializeObject<JObject>(jStr);
+            string token = result["ResultValue"].ToString();
+            token = LoginToken.UpdateToken(token).ToJSON();
+            Console.WriteLine(token);
         }
     }
 }
