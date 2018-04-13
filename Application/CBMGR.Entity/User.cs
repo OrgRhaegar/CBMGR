@@ -11,7 +11,7 @@ namespace CBMGR.Entity
     using System.Data.SqlClient;
     using CBMGR.Common;
     using CBMGR.Interface;
-    using Microsoft.Practices.Unity;
+    using Unity;
 
     /// <summary>
     /// Entity of user

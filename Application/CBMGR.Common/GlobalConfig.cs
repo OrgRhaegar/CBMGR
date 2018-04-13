@@ -9,8 +9,8 @@ namespace CBMGR.Common
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration;
-    using Microsoft.Practices.Unity;
     using Microsoft.Practices.Unity.Configuration;
+    using Unity;
 
     /// <summary>
     /// Global config
