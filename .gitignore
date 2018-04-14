@@ -6,3 +6,4 @@ StyleCop.Cache
 .pdb
 !/Application/CBMGR.WebModule/pages/bin
 .suo
+.vs/
