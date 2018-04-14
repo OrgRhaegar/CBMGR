@@ -38,6 +38,7 @@ namespace CBMGR.Tools.HttpRequestTool
         {
             try
             {
+                this.txtResponse.Text = string.Empty;
                 if (this.rbGet.Checked)
                 {
                     this.SendGetRequest();
@@ -50,6 +51,28 @@ namespace CBMGR.Tools.HttpRequestTool
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            int length = this.txtURL.Text.Length;
+            if (length >= 7)
+            {
+                this.txtURL.Select(7, length - 7);
+            }
+
+            this.txtURL.Focus();
+        }
+
+
+        /// <summary>
+        /// Key press event of textbox url.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        private void txtURL_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                this.btnSend_Click(sender, e);
             }
         }
 

@@ -91,6 +91,7 @@ namespace CBMGR.Tools.HttpRequestTool
             this.txtURL.Size = new System.Drawing.Size(462, 20);
             this.txtURL.TabIndex = 1;
             this.txtURL.Text = "http://";
+            this.txtURL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtURL_KeyPress);
             // 
             // btnSend
             // 
