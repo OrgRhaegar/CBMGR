@@ -54,6 +54,8 @@ namespace CBMGR.Tools.HttpRequestTool
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.lbURL = new System.Windows.Forms.Label();
             this.txtURL = new System.Windows.Forms.TextBox();
@@ -70,7 +72,16 @@ namespace CBMGR.Tools.HttpRequestTool
             this.lbResponse = new System.Windows.Forms.Label();
             this.lbContentType = new System.Windows.Forms.Label();
             this.cbContentType = new System.Windows.Forms.ComboBox();
+            this.gbHead = new System.Windows.Forms.GroupBox();
+            this.brnRemoveHead = new System.Windows.Forms.Button();
+            this.btnAddHead = new System.Windows.Forms.Button();
+            this.dgvHead = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.colKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbMethod.SuspendLayout();
+            this.gbHead.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHead)).BeginInit();
             this.SuspendLayout();
             // 
             // lbURL
@@ -151,16 +162,16 @@ namespace CBMGR.Tools.HttpRequestTool
             // 
             this.txtData.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtData.Location = new System.Drawing.Point(76, 74);
+            this.txtData.Location = new System.Drawing.Point(76, 259);
             this.txtData.Multiline = true;
             this.txtData.Name = "txtData";
-            this.txtData.Size = new System.Drawing.Size(518, 96);
+            this.txtData.Size = new System.Drawing.Size(230, 80);
             this.txtData.TabIndex = 15;
             // 
             // lbData
             // 
             this.lbData.AutoSize = true;
-            this.lbData.Location = new System.Drawing.Point(37, 77);
+            this.lbData.Location = new System.Drawing.Point(37, 262);
             this.lbData.Name = "lbData";
             this.lbData.Size = new System.Drawing.Size(33, 13);
             this.lbData.TabIndex = 6;
@@ -170,16 +181,16 @@ namespace CBMGR.Tools.HttpRequestTool
             // 
             this.txtCookie.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCookie.Location = new System.Drawing.Point(76, 176);
+            this.txtCookie.Location = new System.Drawing.Point(368, 259);
             this.txtCookie.Multiline = true;
             this.txtCookie.Name = "txtCookie";
-            this.txtCookie.Size = new System.Drawing.Size(518, 96);
+            this.txtCookie.Size = new System.Drawing.Size(226, 80);
             this.txtCookie.TabIndex = 20;
             // 
             // lbCookie
             // 
             this.lbCookie.AutoSize = true;
-            this.lbCookie.Location = new System.Drawing.Point(27, 179);
+            this.lbCookie.Location = new System.Drawing.Point(319, 262);
             this.lbCookie.Name = "lbCookie";
             this.lbCookie.Size = new System.Drawing.Size(43, 13);
             this.lbCookie.TabIndex = 8;
@@ -190,19 +201,19 @@ namespace CBMGR.Tools.HttpRequestTool
             this.txtResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtResponse.Location = new System.Drawing.Point(76, 278);
+            this.txtResponse.Location = new System.Drawing.Point(76, 347);
             this.txtResponse.Multiline = true;
             this.txtResponse.Name = "txtResponse";
             this.txtResponse.ReadOnly = true;
             this.txtResponse.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResponse.Size = new System.Drawing.Size(518, 250);
+            this.txtResponse.Size = new System.Drawing.Size(518, 181);
             this.txtResponse.TabIndex = 9;
             this.txtResponse.TabStop = false;
             // 
             // lbResponse
             // 
             this.lbResponse.AutoSize = true;
-            this.lbResponse.Location = new System.Drawing.Point(12, 281);
+            this.lbResponse.Location = new System.Drawing.Point(12, 350);
             this.lbResponse.Name = "lbResponse";
             this.lbResponse.Size = new System.Drawing.Size(58, 13);
             this.lbResponse.TabIndex = 10;
@@ -232,11 +243,95 @@ namespace CBMGR.Tools.HttpRequestTool
             this.cbContentType.Size = new System.Drawing.Size(206, 21);
             this.cbContentType.TabIndex = 12;
             // 
+            // gbHead
+            // 
+            this.gbHead.Controls.Add(this.brnRemoveHead);
+            this.gbHead.Controls.Add(this.btnAddHead);
+            this.gbHead.Controls.Add(this.dgvHead);
+            this.gbHead.Location = new System.Drawing.Point(76, 68);
+            this.gbHead.Name = "gbHead";
+            this.gbHead.Size = new System.Drawing.Size(518, 179);
+            this.gbHead.TabIndex = 21;
+            this.gbHead.TabStop = false;
+            // 
+            // brnRemoveHead
+            // 
+            this.brnRemoveHead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.brnRemoveHead.Location = new System.Drawing.Point(98, 148);
+            this.brnRemoveHead.Name = "brnRemoveHead";
+            this.brnRemoveHead.Size = new System.Drawing.Size(50, 23);
+            this.brnRemoveHead.TabIndex = 23;
+            this.brnRemoveHead.Text = "Remove";
+            this.brnRemoveHead.UseVisualStyleBackColor = true;
+            this.brnRemoveHead.Click += new System.EventHandler(this.brnRemoveHead_Click);
+            // 
+            // btnAddHead
+            // 
+            this.btnAddHead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddHead.Location = new System.Drawing.Point(10, 148);
+            this.btnAddHead.Name = "btnAddHead";
+            this.btnAddHead.Size = new System.Drawing.Size(50, 23);
+            this.btnAddHead.TabIndex = 22;
+            this.btnAddHead.Text = "Add";
+            this.btnAddHead.UseVisualStyleBackColor = true;
+            this.btnAddHead.Click += new System.EventHandler(this.btnAddHead_Click);
+            // 
+            // dgvHead
+            // 
+            this.dgvHead.AllowUserToAddRows = false;
+            this.dgvHead.AllowUserToDeleteRows = false;
+            this.dgvHead.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvHead.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvHead.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colKey,
+            this.colValue});
+            this.dgvHead.Location = new System.Drawing.Point(6, 19);
+            this.dgvHead.MultiSelect = false;
+            this.dgvHead.Name = "dgvHead";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHead.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvHead.Size = new System.Drawing.Size(506, 123);
+            this.dgvHead.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(34, 78);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Head:";
+            // 
+            // colKey
+            // 
+            this.colKey.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colKey.DataPropertyName = "Key";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colKey.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colKey.HeaderText = "Key";
+            this.colKey.Name = "colKey";
+            // 
+            // colValue
+            // 
+            this.colValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colValue.DataPropertyName = "Value";
+            this.colValue.FillWeight = 300F;
+            this.colValue.HeaderText = "Value";
+            this.colValue.Name = "colValue";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 540);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.gbHead);
             this.Controls.Add(this.cbContentType);
             this.Controls.Add(this.lbContentType);
             this.Controls.Add(this.lbResponse);
@@ -256,11 +351,21 @@ namespace CBMGR.Tools.HttpRequestTool
             this.Text = "Http Request Test";
             this.gbMethod.ResumeLayout(false);
             this.gbMethod.PerformLayout();
+            this.gbHead.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvHead)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.GroupBox gbHead;
+        private System.Windows.Forms.Button brnRemoveHead;
+        private System.Windows.Forms.Button btnAddHead;
+        private System.Windows.Forms.DataGridView dgvHead;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colKey;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colValue;
     }
 }

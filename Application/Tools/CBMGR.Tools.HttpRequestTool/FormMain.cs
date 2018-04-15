@@ -7,6 +7,7 @@
 namespace CBMGR.Tools.HttpRequestTool
 {
     using System;
+    using System.ComponentModel;
     using System.IO;
     using System.Net;
     using System.Text;
@@ -17,6 +18,11 @@ namespace CBMGR.Tools.HttpRequestTool
     /// </summary>
     public partial class FormMain : Form
     {
+        /// <summary>
+        /// Http heads.
+        /// </summary>
+        private BindingList<HeadItem> heads;
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the FormMain class.
@@ -25,6 +31,8 @@ namespace CBMGR.Tools.HttpRequestTool
         {
             this.InitializeComponent();
             this.cbContentType.SelectedIndex = 0;
+            this.heads = new BindingList<HeadItem>();
+            this.dgvHead.DataSource = heads;
         }
         #endregion
 
@@ -62,7 +70,6 @@ namespace CBMGR.Tools.HttpRequestTool
             this.txtURL.Focus();
         }
 
-
         /// <summary>
         /// Key press event of textbox url.
         /// </summary>
@@ -85,6 +92,35 @@ namespace CBMGR.Tools.HttpRequestTool
         {
             this.cbContentType.Enabled = this.rbPost.Checked;
         }
+
+        /// <summary>
+        /// Add head item into request.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        private void btnAddHead_Click(object sender, EventArgs e)
+        {
+            this.dgvHead.DataSource = null;
+            this.heads.Add(new HeadItem());
+            this.dgvHead.DataSource = this.heads;
+        }
+
+        /// <summary>
+        /// Remove a head item from request.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">e</param>
+        private void brnRemoveHead_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow currentRow = this.dgvHead.CurrentRow;
+            if (currentRow != null)
+            {
+                int index = this.dgvHead.CurrentRow.Index;
+                this.dgvHead.DataSource = null;
+                this.heads.RemoveAt(index);
+                this.dgvHead.DataSource = this.heads;
+            }
+        }
         #endregion
 
         #region Private methods
@@ -102,6 +138,7 @@ namespace CBMGR.Tools.HttpRequestTool
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
+            request = AddHeadItems(request);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream responseStream = response.GetResponseStream();
             StreamReader sr = new StreamReader(responseStream, Encoding.UTF8);
@@ -120,6 +157,7 @@ namespace CBMGR.Tools.HttpRequestTool
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "POST";
             request.ContentType = this.cbContentType.SelectedItem.ToString();
+            request = AddHeadItems(request);
             request.ContentLength = 0;
             string data = this.txtData.Text.Trim();
             if (!string.IsNullOrEmpty(data))
@@ -138,6 +176,26 @@ namespace CBMGR.Tools.HttpRequestTool
             responseStream.Close();
             response.Close();
             this.txtResponse.Text = data;
+        }
+
+        /// <summary>
+        /// Add head item to http request.
+        /// </summary>
+        /// <param name="request">request</param>
+        /// <returns>request</returns>
+        private HttpWebRequest AddHeadItems(HttpWebRequest request)
+        {
+            foreach(HeadItem head in this.heads)
+            {
+                string key = head.Key;
+                string value = head.Value;
+                if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
+                {
+                    request.Headers.Add(head.Key, head.Value);
+                }
+            }
+
+            return request;
         }
         #endregion
     }
