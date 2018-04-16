@@ -11,6 +11,9 @@
         <div>
             <h1 style="text-align:center">CBMGR Web Api</h1>
             <label id="date" runat="server"></label>
+            <ul>
+                <li><a href="Demo.html" target="_blank">Api Demo</a></li>
+            </ul>
         </div>
     </form>
 </body>

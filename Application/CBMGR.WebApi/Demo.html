@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+    <script src="Resource/Script/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        function testGet() {
+            $.ajax({
+                type: "Get",
+                url: "http://localhost/cbmgr/api/test/getdata",
+                data: { data: "This is test info." },
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
+
+        function testPost() {
+            $.ajax({
+                type: "Post",
+                url: "http://localhost/cbmgr/api/test/postdata",
+                contentType: "application/json",
+                data: "{data: \"This is test info.\"}",
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
+    </script>
+    <style type="text/css">
+        div {
+            color: blue;
+            text-indent: 2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Api Test Demo</h1>
+    <h3>There is a demo of get data:</h3>
+        <div style="text-indent:0em">$.ajax({</div>
+        <div>type: "Get",</div>
+        <div>url: "http://localhost/cbmgr/api/test/getdata",</div>
+        <div>data: { data: "This is test info." },</div>
+        <div>success: function (data) {</div>
+        <div style="text-indent:4em">alert(result);</div>
+        <div>}</div>
+        <div style="text-indent:0em">});</div>
+    <p>
+        Click this button to test get method.
+        <button onclick="testGet()" style="margin-left:5px;">Test Get</button>
+    </p><br/><br /><br />
+    <h3>There is a demo of post data:</h3>
+        <div style="text-indent:0em">$.ajax({</div>
+        <div>type: "Post",</div>
+        <div>url: "http://localhost/cbmgr/api/test/postdata",</div>
+        <div>contentType: "application/json",</div>
+        <div>data: "{data: \"This is test info.\"}",</div>
+        <div>success: function (data) {</div>
+        <div style="text-indent:4em">alert(result);</div>
+        <div>}</div>
+        <div style="text-indent:0em">});</div>
+    <p>
+        Ckick this button to test post method.
+        <button onclick="testPost()" style="margin-left:5px;">Test Post</button>
+    </p>
+</body>
+</html>
