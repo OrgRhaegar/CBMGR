@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Club.cs" />
+    <Compile Include="Email.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="LoginToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
