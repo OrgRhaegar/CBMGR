@@ -6,9 +6,10 @@
     <script src="Resource/Script/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
         function testGet() {
+            var host = location.hostname;
             $.ajax({
                 type: "Get",
-                url: "http://localhost/cbmgr/api/test/getdata",
+                url: "http://" + host + "/cbmgr/api/test/getdata",
                 data: { data: "This is test info." },
                 success: function (data) {
                     alert(data);
@@ -17,9 +18,10 @@
         }
 
         function testPost() {
+            var host = location.hostname;
             $.ajax({
                 type: "Post",
-                url: "http://localhost/cbmgr/api/test/postdata",
+                url: "http://" + host + "/cbmgr/api/test/postdata",
                 contentType: "application/json",
                 data: "{data: \"This is test info.\"}",
                 success: function (data) {
