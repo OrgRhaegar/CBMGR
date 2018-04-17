@@ -90,7 +90,7 @@ namespace CBMGR.Entity
             {
                 SmtpClient client = this.GetMailClient();
                 MailMessage mail = this.GetMailMessage(recipient, cc, subject, body);
-                client.SendAsync(mail, null);
+                client.Send(mail);
                 result.Message = "Mail has been sent.";
             }
             catch (Exception ex)
@@ -118,7 +118,7 @@ namespace CBMGR.Entity
             {
                 SmtpClient client = this.GetMailClient();
                 MailMessage mail = this.GetMailMessage(recipient, cc, subject, body);
-                client.Send(mail);
+                client.SendAsync(mail, null);
                 result.Message = "Mail has been sent.";
             }
             catch (Exception ex)
@@ -165,9 +165,12 @@ namespace CBMGR.Entity
                 mail.To.Add(addr);
             }
 
-            foreach (string addr in cc)
+            if (cc != null && cc.Length > 0)
             {
-                mail.CC.Add(addr);
+                foreach (string addr in cc)
+                {
+                    mail.CC.Add(addr);
+                }
             }
 
             mail.Subject = subject;
