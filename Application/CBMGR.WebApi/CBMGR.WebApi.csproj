@@ -137,6 +137,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ioc.config" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -148,6 +149,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CBMGR.Entity\CBMGR.Entity.csproj">
+      <Project>{e8e6ff0e-4103-4703-9a0d-76a61263dfde}</Project>
+      <Name>CBMGR.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CBMGR.Interface\CBMGR.Interface.csproj">
+      <Project>{31b157eb-f888-4037-ab45-6e185e7b2f23}</Project>
+      <Name>CBMGR.Interface</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
