@@ -17,12 +17,28 @@ namespace CBMGR.Entity
     /// </summary>
     public class LoginToken
     {
+        #region Field
+        /// <summary>
+        /// User id.
+        /// </summary>
+        private string userId;
+
+        /// <summary>
+        /// Date of this token created.
+        /// </summary>
+        private DateTime createDate;
+
+        /// <summary>
+        /// Count of this token updating time.
+        /// </summary>
+        private int updateCount;
+        #endregion
+
         #region Constructor
         /// <summary>
         /// Initializes a new instance of the LoginToken class.
-        /// <param name="userId">User id</param>
-        /// <param name="initType">Initialization type of token string.</param>
         /// </summary>
+        /// <param name="userId">User id</param>
         public LoginToken(string userId)
         {
             this.userId = userId;
@@ -33,11 +49,6 @@ namespace CBMGR.Entity
 
         #region Property
         /// <summary>
-        /// User id.
-        /// </summary>
-        private string userId;
-
-        /// <summary>
         /// Gets a value of user id.
         /// </summary>
         public string UserId
@@ -47,11 +58,6 @@ namespace CBMGR.Entity
                 return this.userId;
             }
         }
-
-        /// <summary>
-        /// Date of this token created.
-        /// </summary>
-        private DateTime createDate;
 
         /// <summary>
         /// Gets a value of create date.
@@ -65,7 +71,7 @@ namespace CBMGR.Entity
         }
 
         /// <summary>
-        /// Gets a value wether this token is valid.
+        /// Gets a value indicating whether this token is valid.
         /// </summary>
         public bool IsValid
         {
@@ -78,11 +84,6 @@ namespace CBMGR.Entity
         }
 
         /// <summary>
-        /// Count of this token updating time.
-        /// </summary>
-        private int updateCount;
-
-        /// <summary>
         /// Gets a value of update count.
         /// </summary>
         public int UpdateCount
@@ -90,38 +91,6 @@ namespace CBMGR.Entity
             get
             {
                 return this.updateCount;
-            }
-        }
-        #endregion
-
-        #region Pulbic method
-        /// <summary>
-        /// Get json string of this entity
-        /// </summary>
-        /// <returns>Json string of this entity.</returns>
-        public string ToJSON()
-        {
-            string jsonStr = JsonConvert.SerializeObject(this);
-            return jsonStr;
-        }
-
-        /// <summary>
-        /// Get encrypted token string.
-        /// </summary>
-        /// <returns></returns>
-        public string GetToken()
-        {
-            if (!this.IsValid)
-            {
-                return string.Empty;
-            }
-            else
-            {
-                string token = this.ToJSON();
-                IUnityContainer container = GlobalConfig.IocContainer;
-                ISecurity iSecurity = container.Resolve<ISecurity>();
-                token = iSecurity.GetAesEncryptedString(token);
-                return token;
             }
         }
         #endregion
@@ -143,7 +112,7 @@ namespace CBMGR.Entity
                 LoginToken token = JsonConvert.DeserializeObject<LoginToken>(tokenStr);
                 verify = token.IsValid;
             }
-            catch (Exception ex)
+            catch
             {
                 verify = false;
             }
@@ -155,7 +124,7 @@ namespace CBMGR.Entity
         /// Prolong token's period of validity.
         /// Number of updating times must less then 10.
         /// </summary>
-        /// <param name="totokenStrken">Original token.</param>
+        /// <param name="tokenStr">Original token.</param>
         /// <returns>Update result.</returns>
         public static ActionResult UpdateToken(string tokenStr)
         {
@@ -183,12 +152,44 @@ namespace CBMGR.Entity
                     result.ResultValue = token.GetToken();
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 result.Message = "Validation of token failed.";
             }
 
             return result;
+        }
+        #endregion
+
+        #region Pulbic method
+        /// <summary>
+        /// Get json string of this entity
+        /// </summary>
+        /// <returns>Json string of this entity.</returns>
+        public string ToJSON()
+        {
+            string jsonStr = JsonConvert.SerializeObject(this);
+            return jsonStr;
+        }
+
+        /// <summary>
+        /// Get encrypted token string.
+        /// </summary>
+        /// <returns>login token</returns>
+        public string GetToken()
+        {
+            if (!this.IsValid)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                string token = this.ToJSON();
+                IUnityContainer container = GlobalConfig.IocContainer;
+                ISecurity iSecurity = container.Resolve<ISecurity>();
+                token = iSecurity.GetAesEncryptedString(token);
+                return token;
+            }
         }
         #endregion
     }

@@ -9,10 +9,13 @@ namespace CBMGR.Entity
     using System;
     using System.Net;
     using System.Net.Mail;
-    using Unity;
-    using CBMGR.Interface;
     using CBMGR.Common;
+    using CBMGR.Interface;
+    using Unity;
 
+    /// <summary>
+    /// Entity of Email
+    /// </summary>
     public class Email : IMail
     {
         #region field
@@ -37,26 +40,14 @@ namespace CBMGR.Entity
         private string password;
 
         /// <summary>
-        /// Mail server login password.
-        /// </summary>
-        private string Password
-        {
-            get
-            {
-                ISecurity isecurity = GlobalConfig.IocContainer.Resolve<ISecurity>();
-                return isecurity.GetAesDecryptedString(this.password);
-            }
-        }
-
-        /// <summary>
         /// Mail sneder.
         /// </summary>
-        public string sender;
+        private string sender;
 
         /// <summary>
         /// Enalbe SSL
         /// </summary>
-        public bool enableSSL;
+        private bool enableSSL;
         #endregion
 
         #region Constructor
@@ -74,11 +65,25 @@ namespace CBMGR.Entity
         }
         #endregion
 
+        #region Property
+        /// <summary>
+        /// Gets mail server login password.
+        /// </summary>
+        private string Password
+        {
+            get
+            {
+                ISecurity isecurity = GlobalConfig.IocContainer.Resolve<ISecurity>();
+                return isecurity.GetAesDecryptedString(this.password);
+            }
+        }
+        #endregion
+
         #region members of IMail
         /// <summary>
         /// Send a mail async
         /// </summary>
-        /// <param name="recipient">recipients</param>
+        /// <param name="recipient">mail recipients</param>
         /// <param name="cc">mail cc</param>
         /// <param name="subject">mail subject</param>
         /// <param name="body">mai body</param>
@@ -106,12 +111,12 @@ namespace CBMGR.Entity
         /// <summary>
         /// Send a mail async
         /// </summary>
-        /// <param name="recipient">recipients</param>
+        /// <param name="recipient">mail recipients</param>
         /// <param name="cc">mail cc</param>
         /// <param name="subject">mail subject</param>
         /// <param name="body">mai body</param>
         /// <returns>Action result</returns>
-        public ActionResult SendMailAsync(string[] recipient, string[] cc,string subject, string body)
+        public ActionResult SendMailAsync(string[] recipient, string[] cc, string subject, string body)
         {
             ActionResult result = new ActionResult();
             try
@@ -150,10 +155,10 @@ namespace CBMGR.Entity
         /// <summary>
         /// Create a mail message to send.
         /// </summary>
-        /// <param name="recipient"></param>
-        /// <param name="cc"></param>
-        /// <param name="subject"></param>
-        /// <param name="body"></param>
+        /// <param name="recipient">mail recipient</param>
+        /// <param name="cc">mail cc</param>
+        /// <param name="subject">mail subject</param>
+        /// <param name="body">mail body</param>
         /// <returns>Mail message.</returns>
         private MailMessage GetMailMessage(string[] recipient, string[] cc, string subject, string body)
         {

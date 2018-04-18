@@ -14,22 +14,21 @@ namespace CBMGR.Interface
         /// <summary>
         /// Send a mail async
         /// </summary>
-        /// <param name="recipient">recipients</param>
+        /// <param name="recipient">mail recipients</param>
         /// <param name="cc">mail cc</param>
-        /// <param name="to">mail to</param>
         /// <param name="subject">mail subject</param>
         /// <param name="body">mai body</param>
-        /// <returns></returns>
+        /// <returns>send resutl</returns>
         ActionResult SendMailAsync(string[] recipient, string[] cc, string subject, string body);
 
         /// <summary>
         /// Send a mail
         /// </summary>
-        /// <param name="recipient">recipients</param>
+        /// <param name="recipient">mail recipients</param>
         /// <param name="cc">mail cc</param>
         /// <param name="subject">mail subject</param>
         /// <param name="body">mai body</param>
-        /// <returns></returns>
-        ActionResult SendMail(string[] recipient, string[] cc,string subject, string body);
+        /// <returns>send resutl</returns>
+        ActionResult SendMail(string[] recipient, string[] cc, string subject, string body);
     }
 }

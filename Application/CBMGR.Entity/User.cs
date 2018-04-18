@@ -64,6 +64,8 @@ namespace CBMGR.Entity
         /// <summary>
         /// Get club list of current user.
         /// </summary>
+        /// <param name="loginName">login name</param>
+        /// <param name="password">login pwd</param>
         /// <returns>Club list</returns>
         public ActionResult UserLogin(string loginName, string password)
         {

@@ -1,0 +1,35 @@
+/*******************************************
+ * data: 2018-04-17
+ * auth: Rhaegar
+ * desc: Create a app key
+ *******************************************/
+ IF EXISTS(SELECT NAME FROM SYSOBJECTS WHERE NAME='CM_SP_CreateAppKey')
+ DROP PROCEDURE CM_SP_CreateAppKey
+ GO
+ 
+ CREATE PROCEDURE CM_SP_CreateAppKey
+ @EMAIL VARCHAR(100),
+ @KEY_VALUE VARCHAR(200)
+ AS
+ BEGIN
+	BEGIN TRY
+		DECLARE @CONT INT
+		SELECT @CONT = COUNT(*) FROM CM_Sys_AppKey WHERE [EMAIL] = @EMAIL
+		IF @CONT > 0
+		BEGIN
+			SELECT 0 AS RESULT, 'Emal already exists in key list.' AS MSG
+		END
+		ELSE
+		BEGIN
+			DECLARE @NOW DATETIME SET @NOW = GETDATE()
+			INSERT INTO CM_Sys_AppKey
+			([KEY_VALUE], [EMAIL], [CREATE_DATE], [LAST_REQUIRED], [STATU], [COMMENT])
+			VALUES
+			(@KEY_VALUE, @EMAIL, @NOW, @NOW, 1, NULL)
+			SELECT 1 AS RESULT, NULL AS MSG
+		END
+	END TRY
+ 	BEGIN CATCH
+ 		SELECT 0 AS RESULT, ERROR_MESSAGE() AS MSG
+ 	END CATCH
+ END
