@@ -131,8 +131,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ApiHelp\AppKey.html" />
     <Content Include="Default.aspx" />
-    <Content Include="Demo.html" />
+    <Content Include="ApiHelp\Demo.html" />
     <Content Include="Global.asax" />
     <Content Include="Resource\Script\jquery-3.3.1.min.js" />
     <Content Include="Web.config" />

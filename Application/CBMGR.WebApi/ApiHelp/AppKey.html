@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>App Key</title>
+    <script src="../Resource/Script/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        var mail;
+        function Validate() {
+            mail = $("#txtEmail").val();
+            var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+            if (mail.length == 0) {
+                $("#txtResult").text("Email is required!");
+                return false;
+            }
+            else if (!reg.test(mail)) {
+                $("#txtResult").text("Invalid email address!");
+                return false;
+            }
+            return true;
+        }
+
+        function RequestNewKey() {
+            if (!Validate()) {
+                return;
+            }
+            else {
+                var host = location.hostname;
+                var apiUrl = "http://" + host + "/cbmgr/api/system/newkey";
+                $.ajax({
+                    type: "Get",
+                    url: apiUrl,
+                    data: { email: mail },
+                    success: function (data) {
+                        var result = JSON.parse(data);
+                        var text = "";
+                        if (result.Result) {
+                            text = "A new key has been created. Please check your mail box to recieve it.";
+                        }
+                        else {
+                            text = result.Message;
+                        }
+                        $("#txtResult").text(text);
+                    }
+                });
+            }
+        }
+
+        function GetAppKeyByEmail() {
+            if (!Validate()) {
+                return;
+            }
+            else {
+                alert("Not finished yet.");
+            }
+        }
+
+        function ResetAppKey() {
+            if (!Validate()) {
+                return;
+            }
+            else {
+                alert("Not finished yet.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>App Key</h1>
+    <p>
+        App key is the id of a user who wants to use the api.<br />
+        Operations of app key is binding to your email address.<br />
+        Please fill the text box blow with email address first.
+    </p>
+    <p>
+        Email:<input id="txtEmail" style="margin-left:5px;" type="text" />
+        <label id="txtResult" style="margin-left:5px;color:red;" />
+    </p>
+    <p>
+        Click the button blow to request a new key if you don't have one.<br />
+        <button id="btnRequest" style="margin-left:5px;" onclick="RequestNewKey()">Request A New Key</button>
+    </p>
+    <p>
+        Click the button blow to get your app key by email if you forget it.<br />
+        <button id="btnGetKey" style="margin-left:5px;" onclick="GetAppKeyByEmail()">Get Key By Email</button>
+    </p>
+    <p>
+        Click the button blow to reset your app key if the old one is exposed.<br />
+        <button id="btnResetKey" style="margin-left:5px;" onclick="ResetAppKey()">Reset App Key</button>
+    </p>
+</body>
+</html>

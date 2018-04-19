@@ -24,7 +24,7 @@ namespace CBMGR.WebApi.Controllers
             try
             {
                 ISystem isys = GlobalConfig.IocContainer.Resolve<ISystem>();
-                result = isys.RequestAppKey(email);
+                result = isys.RequestAppKey(email.Trim());
             }
             catch
             {
