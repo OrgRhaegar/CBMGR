@@ -17,5 +17,19 @@ namespace CBMGR.Interface
         /// <param name="email">email address</param>
         /// <returns>result of action</returns>
         ActionResult RequestAppKey(string email);
+
+        /// <summary>
+        /// Get app key by email address.
+        /// </summary>
+        /// <param name="email">email address</param>
+        /// <returns>result of action</returns>
+        ActionResult GetAppKeyByEmail(string email);
+
+        /// <summary>
+        /// Reset the app key.
+        /// </summary>
+        /// <param name="email">email address.</param>
+        /// <returns>result of action</returns>
+        ActionResult RestAppKey(string email);
     }
 }
