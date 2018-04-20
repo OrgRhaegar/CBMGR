@@ -14,7 +14,7 @@ namespace CBMGR.WebApi.Controllers
     #endregion
 
     [RoutePrefix("cbmgr/api/system")]
-    public class SysController : ApiController
+    public class AppKeyController : ApiController
     {
         [Route("newkey")]
         [HttpGet]
@@ -23,8 +23,8 @@ namespace CBMGR.WebApi.Controllers
             ActionResult result = new ActionResult();
             try
             {
-                ISystem isys = GlobalConfig.IocContainer.Resolve<ISystem>();
-                result = isys.RequestAppKey(email.Trim());
+                IAppKey iKey = GlobalConfig.IocContainer.Resolve<IAppKey>();
+                result = iKey.RequestAppKey(email.Trim());
             }
             catch
             {

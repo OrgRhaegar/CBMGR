@@ -21,7 +21,7 @@ namespace CBMGR.Entity
     /// <summary>
     /// Entity of Sys
     /// </summary>
-    public class Sys : ISystem
+    public class AppKey : IAppKey
     {
         #region members of ISystem
         /// <summary>
@@ -43,7 +43,7 @@ namespace CBMGR.Entity
                 try
                 {
                     string appKey = this.CreateNewKey();
-                    ISystem iSys = GlobalConfig.IocContainer.Resolve<ISystem>();
+                    IAppKey iSys = GlobalConfig.IocContainer.Resolve<IAppKey>();
                     string sql = "EXEC CM_SP_CreateAppKey @EMAIL=@mail, @KEY_VALUE=@key";
                     SqlParameter[] parArray = new SqlParameter[2];
                     parArray[0] = new SqlParameter("@mail", email);
@@ -70,6 +70,26 @@ namespace CBMGR.Entity
             }
 
             return resutl;
+        }
+
+        /// <summary>
+        /// Get app key by email address.
+        /// </summary>
+        /// <param name="email">email address</param>
+        /// <returns>result of action</returns>
+        public ActionResult GetAppKeyByEmail(string email)
+        {
+            throw new Exception();
+        }
+
+        /// <summary>
+        /// Reset the app key.
+        /// </summary>
+        /// <param name="email">email address.</param>
+        /// <returns>result of action</returns>
+        public ActionResult RestAppKey(string email)
+        {
+            throw new Exception();
         }
         #endregion
 

@@ -142,7 +142,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthAttribute.cs" />
     <Compile Include="Controllers\CommomController.cs" />
-    <Compile Include="Controllers\SysController.cs" />
+    <Compile Include="Controllers\AppKeyController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

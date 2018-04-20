@@ -9,7 +9,7 @@ namespace CBMGR.Interface
     /// <summary>
     /// Interface of system
     /// </summary>
-    public interface ISystem
+    public interface IAppKey
     {
         /// <summary>
         /// Request a new app key.

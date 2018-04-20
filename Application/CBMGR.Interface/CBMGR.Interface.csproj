@@ -50,7 +50,7 @@
     <Compile Include="IGame.cs" />
     <Compile Include="IMail.cs" />
     <Compile Include="ISecurity.cs" />
-    <Compile Include="ISystem.cs" />
+    <Compile Include="IAppKey.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
