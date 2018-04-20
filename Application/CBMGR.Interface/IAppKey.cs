@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="ISystem.cs" company="RGS">
+// <copyright file="IAppKey.cs" company="RGS">
 //     Copyright RGS. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------

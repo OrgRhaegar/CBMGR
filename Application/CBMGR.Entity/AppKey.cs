@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="Sys.cs" company="RGS">
+// <copyright file="AppKey.cs" company="RGS">
 //     Copyright RGS. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -23,7 +23,44 @@ namespace CBMGR.Entity
     /// </summary>
     public class AppKey : IAppKey
     {
-        #region members of ISystem
+        #region Field
+        /// <summary>
+        /// Key id
+        /// </summary>
+        private int keyId;
+
+        /// <summary>
+        /// App Key
+        /// </summary>
+        private string keyValue;
+
+        /// <summary>
+        /// Email address.
+        /// </summary>
+        private string email;
+
+        /// <summary>
+        /// Create date.
+        /// </summary>
+        private DateTime createDate;
+
+        /// <summary>
+        /// Last required date.
+        /// </summary>
+        private DateTime lastRequired;
+
+        /// <summary>
+        /// Key status.
+        /// </summary>
+        private int status;
+
+        /// <summary>
+        /// Key comment.
+        /// </summary>
+        private string commetn;
+        #endregion
+
+        #region Members of ISystem
         /// <summary>
         /// Require a new app key
         /// </summary>
@@ -42,7 +79,7 @@ namespace CBMGR.Entity
             {
                 try
                 {
-                    string appKey = this.CreateNewKey();
+                    string appKey = this.CreateNewKeyString();
                     IAppKey iSys = GlobalConfig.IocContainer.Resolve<IAppKey>();
                     string sql = "EXEC CM_SP_CreateAppKey @EMAIL=@mail, @KEY_VALUE=@key";
                     SqlParameter[] parArray = new SqlParameter[2];
@@ -54,7 +91,7 @@ namespace CBMGR.Entity
                     {
                         resutl.Result = true;
                         resutl.ResultValue = appKey;
-                        this.SendKeyMail(email, appKey);
+                        this.SendKeyByMail(email, appKey);
                     }
                     else
                     {
@@ -95,22 +132,10 @@ namespace CBMGR.Entity
 
         #region private method
         /// <summary>
-        /// Verify the mail address.
-        /// </summary>
-        /// <param name="email">email address</param>
-        /// <returns>validate result</returns>
-        private bool ValidateEmailAddress(string email)
-        {
-            Regex r = new Regex("^\\s*([A-Za-z0-9_-]+(\\.\\w+)*@(\\w+\\.)+\\w{2,5})\\s*$");
-            bool verify = r.IsMatch(email);
-            return verify;
-        }
-
-        /// <summary>
         /// Create a new app key
         /// </summary>
         /// <returns>new key</returns>
-        private string CreateNewKey()
+        private string CreateNewKeyString()
         {
             string keyChar = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             char[] keyArray = keyChar.ToArray<char>();
@@ -129,11 +154,23 @@ namespace CBMGR.Entity
         }
 
         /// <summary>
+        /// Verify the mail address.
+        /// </summary>
+        /// <param name="email">email address</param>
+        /// <returns>validate result</returns>
+        private bool ValidateEmailAddress(string email)
+        {
+            Regex r = new Regex("^\\s*([A-Za-z0-9_-]+(\\.\\w+)*@(\\w+\\.)+\\w{2,5})\\s*$");
+            bool verify = r.IsMatch(email);
+            return verify;
+        }
+
+        /// <summary>
         /// Send app key by email.
         /// </summary>
         /// <param name="email">email address</param>
         /// <param name="key">app key</param>
-        private void SendKeyMail(string email, string key)
+        private void SendKeyByMail(string email, string key)
         {
             IMail imail = GlobalConfig.IocContainer.Resolve<IMail>();
             string subject = "App Key";
@@ -143,6 +180,22 @@ namespace CBMGR.Entity
             sbMailBody.Append("<div>Please save it safely.</div>");
             string mailBody = sbMailBody.ToString();
             imail.SendMail(new string[] { email }, null, subject, mailBody);
+        }
+
+        /// <summary>
+        /// Init key data from database;
+        /// </summary>
+        private void Initialize()
+        {
+
+        }
+
+        /// <summary>
+        /// Update app key data to database.
+        /// </summary>
+        private void Update()
+        {
+
         }
         #endregion
     }
