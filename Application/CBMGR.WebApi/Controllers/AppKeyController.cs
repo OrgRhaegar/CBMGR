@@ -13,23 +13,63 @@ namespace CBMGR.WebApi.Controllers
     using Unity;
     #endregion
 
-    [RoutePrefix("cbmgr/api/system")]
+    [RoutePrefix("cbmgr/api/appkey")]
     public class AppKeyController : ApiController
     {
-        [Route("newkey")]
+        private IAppKey iAppkey
+        {
+            get
+            {
+                return GlobalConfig.IocContainer.Resolve<IAppKey>();
+            }
+        }
+
+        [Route("create")]
         [HttpGet]
         public string CreateAppKey(string email)
         {
             ActionResult result = new ActionResult();
             try
             {
-                IAppKey iKey = GlobalConfig.IocContainer.Resolve<IAppKey>();
-                result = iKey.RequestAppKey(email.Trim());
+                result = this.iAppkey.RequestAppKey(email.Trim());
             }
             catch
             {
-                result.Result = false;
                 result.Message = "Failed to request a new app key.";
+            }
+
+            return result.ToJSON();
+        }
+
+        [Route("get")]
+        [HttpGet]
+        public string GetAppKey(string email)
+        {
+            ActionResult result = new ActionResult();
+            try
+            {
+                result = this.iAppkey.GetAppKeyByEmail(email);
+            }
+            catch
+            {
+                result.Message = "Failed to get app key.";
+            }
+
+            return result.ToJSON();
+        }
+
+        [Route("reset")]
+        [HttpGet]
+        public string ResetKey(string email)
+        {
+            ActionResult result = new ActionResult();
+            try
+            {
+                result = this.iAppkey.ResetAppKey(email);
+            }
+            catch
+            {
+                result.Message = "Failed to reset app key.";
             }
 
             return result.ToJSON();

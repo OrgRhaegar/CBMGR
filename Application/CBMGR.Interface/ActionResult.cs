@@ -19,7 +19,7 @@ namespace CBMGR.Interface
         /// </summary>
         public ActionResult()
         {
-            this.Result = true;
+            this.Result = false;
             this.ResultValue = 0;
             this.Message = string.Empty;
         }

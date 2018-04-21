@@ -21,13 +21,13 @@
             return true;
         }
 
-        function RequestNewKey() {
+        function RequestData(url, msg) {
             if (!Validate()) {
                 return;
             }
             else {
                 var host = location.hostname;
-                var apiUrl = "http://" + host + "/cbmgr/api/system/newkey";
+                var apiUrl = "http://" + host + "/cbmgr/api/appkey/" + url;
                 $.ajax({
                     type: "Get",
                     url: apiUrl,
@@ -36,7 +36,7 @@
                         var result = JSON.parse(data);
                         var text = "";
                         if (result.Result) {
-                            text = "A new key has been created. Please check your mail box to recieve it.";
+                            text = msg;
                         }
                         else {
                             text = result.Message;
@@ -47,22 +47,16 @@
             }
         }
 
+        function RequestNewKey() {
+            RequestData("create", "A new key has been created. Please check your mail box to recieve it.");
+        }
+
         function GetAppKeyByEmail() {
-            if (!Validate()) {
-                return;
-            }
-            else {
-                alert("Not finished yet.");
-            }
+            RequestData("get", "Please check your mail box to recieve your app key.");
         }
 
         function ResetAppKey() {
-            if (!Validate()) {
-                return;
-            }
-            else {
-                alert("Not finished yet.");
-            }
+            RequestData("reset", "Please check your mail box to recieve your app key.");
         }
     </script>
 </head>

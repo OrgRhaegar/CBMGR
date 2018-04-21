@@ -52,7 +52,7 @@ namespace CBMGR.Entity
         /// <summary>
         /// Key status.
         /// </summary>
-        private int status;
+        private bool enabled;
 
         /// <summary>
         /// Key comment.
@@ -84,7 +84,7 @@ namespace CBMGR.Entity
         /// <returns>action result</returns>
         public ActionResult RequestAppKey(string email)
         {
-            ActionResult result = new ActionResult() { Result = false };
+            ActionResult result = new ActionResult();
             bool verify = this.ValidateEmailAddress(email);
             if (!verify)
             {
@@ -124,7 +124,7 @@ namespace CBMGR.Entity
         /// <returns>result of action</returns>
         public ActionResult GetAppKeyByEmail(string email)
         {
-            ActionResult result = new ActionResult() { Result = false };
+            ActionResult result = new ActionResult();
             bool verify = this.ValidateEmailAddress(email);
             if (!verify)
             {
@@ -160,9 +160,9 @@ namespace CBMGR.Entity
         /// </summary>
         /// <param name="email">email address.</param>
         /// <returns>result of action</returns>
-        public ActionResult RestAppKey(string email)
+        public ActionResult ResetAppKey(string email)
         {
-            ActionResult result = new ActionResult() { Result = false };
+            ActionResult result = new ActionResult();
             bool verify = this.ValidateEmailAddress(email);
             if (!verify)
             {
@@ -186,6 +186,10 @@ namespace CBMGR.Entity
                         result.Message = "Request app key once every ten minutes.";
                     }
                 }
+                else
+                {
+                    result.Message = "Didn't find eamil in key list.";
+                }
             }
 
             return result;
@@ -199,8 +203,9 @@ namespace CBMGR.Entity
         public bool ValidateAppKey(string key)
         {
             this.keyValue = key;
+            this.enabled = false;
             this.Initialize(InitializeKeyFrom.KEY_VALUE);
-            return this.status == 1;
+            return this.enabled;
         }
         #endregion
 
@@ -253,7 +258,7 @@ namespace CBMGR.Entity
             sbMailBody.Append(string.Format("<div><b>{0}</b></div>", key));
             sbMailBody.Append("<div>Please save it safely.</div>");
             string mailBody = sbMailBody.ToString();
-            imail.SendMailAsync(new string[] { email }, null, subject, mailBody);
+            imail.SendMail(new string[] { email }, null, subject, mailBody);
         }
 
         /// <summary>
@@ -264,7 +269,7 @@ namespace CBMGR.Entity
         private bool Initialize(InitializeKeyFrom from)
         {
             bool init = false;
-            string sql = $"SELECT KEY_ID,KEY_VALUE,EMAIL,CREATE_DATE,LAST_REQUIRED,STATU,COMMENT FROM CM_Sys_AppKey WHERE {from}=@PAR";
+            string sql = $"SELECT KEY_ID,KEY_VALUE,EMAIL,CREATE_DATE,LAST_REQUIRED,ENABLED,COMMENT FROM CM_Sys_AppKey WHERE {from}=@PAR";
             IDBHelper dbi = GlobalConfig.IocContainer.Resolve<IDBHelper>();
             string parValue = from == InitializeKeyFrom.EMAIL ? this.email : this.keyValue;
             SqlParameter par = new SqlParameter("@PAR", parValue);
@@ -277,7 +282,7 @@ namespace CBMGR.Entity
                 this.email = keyRow["EMAIL"].ToString();
                 this.createDate = (DateTime)keyRow["CREATE_DATE"];
                 this.lastRequired = (DateTime)keyRow["LAST_REQUIRED"];
-                this.status = (int)keyRow["STATU"];
+                this.enabled = (bool)keyRow["ENABLED"];
                 this.commetn = keyRow["COMMENT"].ToString();
                 init = true;
             }
@@ -313,12 +318,12 @@ namespace CBMGR.Entity
         /// </summary>
         private void Update()
         {
-            string sql = "UPDATE CM_Sys_AppKey SET KEY_VALUE=@KEY,LAST_REQUIRED=@LAST,STATU=@STATUS,COMMENT=@COMMENT WHERE EMAIL=@EMAIL";
+            string sql = "UPDATE CM_Sys_AppKey SET KEY_VALUE=@KEY,LAST_REQUIRED=@LAST,ENABLED=@ENABLED,COMMENT=@COMMENT WHERE EMAIL=@EMAIL";
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@KEY", this.keyValue),
                 new SqlParameter("@LAST", DateTime.Now),
-                new SqlParameter("@STATUS", this.status),
+                new SqlParameter("@ENABLED", this.enabled),
                 new SqlParameter("@COMMENT", this.commetn),
                 new SqlParameter("@EMAIL", this.email)
             };

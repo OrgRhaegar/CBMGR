@@ -30,7 +30,7 @@ namespace CBMGR.Interface
         /// </summary>
         /// <param name="email">email address.</param>
         /// <returns>result of action</returns>
-        ActionResult RestAppKey(string email);
+        ActionResult ResetAppKey(string email);
 
         /// <summary>
         /// Validate key value
