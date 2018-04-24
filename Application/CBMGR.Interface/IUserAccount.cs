@@ -30,14 +30,6 @@ namespace CBMGR.Interface
         ActionResult UserLogin(string appKey, string loginName, string password);
 
         /// <summary>
-        /// Login from we chat
-        /// </summary>
-        /// <param name="appKey">app key</param>
-        /// <param name="weChatId">we chat id</param>
-        /// <returns>login result</returns>
-        ActionResult WeChatLogin(string appKey, string weChatId);
-
-        /// <summary>
         /// Update user's password
         /// </summary>
         /// <param name="token">login token</param>
