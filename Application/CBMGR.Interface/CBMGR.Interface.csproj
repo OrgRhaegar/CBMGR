@@ -51,7 +51,7 @@
     <Compile Include="IMail.cs" />
     <Compile Include="ISecurity.cs" />
     <Compile Include="IAppKey.cs" />
-    <Compile Include="IUser.cs" />
+    <Compile Include="IUserAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

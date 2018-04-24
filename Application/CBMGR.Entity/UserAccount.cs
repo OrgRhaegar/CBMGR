@@ -1,31 +1,34 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="User.cs" company="RGS">
+// <copyright file="UserAccount.cs" company="RGS">
 //     Copyright RGS. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
 
 namespace CBMGR.Entity
 {
+    #region using
     using System;
     using System.Data;
     using System.Data.SqlClient;
     using CBMGR.Common;
     using CBMGR.Interface;
     using Unity;
+    #endregion
 
     /// <summary>
     /// Entity of user
     /// </summary>
-    public class User : IUser
+    public class UserAccount : IUserAccount
     {
         #region Members of IUser
         /// <summary>
         /// Sign up for a new user.
         /// </summary>
+        /// <param name="appKey">app key</param>
         /// <param name="loginName">login name</param>
         /// <param name="password">login password</param>
-        /// <returns>user guid</returns>
-        public ActionResult CreateNewUser(string loginName, string password)
+        /// <returns>login result</returns>
+        public ActionResult CreateNewUser(string appKey, string loginName, string password)
         {
             ActionResult result = new ActionResult();
             try
@@ -54,20 +57,11 @@ namespace CBMGR.Entity
         /// <summary>
         /// Sign in as a exist user.
         /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>Clubs that this user belongs to.</returns>
-        public ActionResult GetClubListByUserId(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Get club list of current user.
-        /// </summary>
+        /// <param name="appKey">app key</param>
         /// <param name="loginName">login name</param>
-        /// <param name="password">login pwd</param>
-        /// <returns>Club list</returns>
-        public ActionResult UserLogin(string loginName, string password)
+        /// <param name="password">login password</param>
+        /// <returns>login result</returns>
+        public ActionResult UserLogin(string appKey, string loginName, string password)
         {
             ActionResult result = new ActionResult();
             try
@@ -98,6 +92,42 @@ namespace CBMGR.Entity
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Login from we chat
+        /// </summary>
+        /// <param name="appKey">app key</param>
+        /// <param name="weChatId">we chat id</param>
+        /// <returns>login result</returns>
+        public ActionResult WeChatLogin(string appKey, string weChatId)
+        {
+            throw new Exception();
+        }
+
+        /// <summary>
+        /// Update user's password
+        /// </summary>
+        /// <param name="token">login token</param>
+        /// <param name="userId">user id</param>
+        /// <param name="password">old password</param>
+        /// <param name="newPwd">new password</param>
+        /// <returns>update result</returns>
+        public ActionResult UpdatePassword(string token, string userId, string password, string newPwd)
+        {
+            throw new Exception();
+        }
+
+        /// <summary>
+        /// Reset user's pasword
+        /// </summary>
+        /// <param name="appKey">app key</param>
+        /// <param name="loginName">login name</param>
+        /// <param name="email">email address</param>
+        /// <returns>update result</returns>
+        public ActionResult ResertPassowrd(string appKey, string loginName, string email)
+        {
+            throw new Exception();
         }
         #endregion
     }

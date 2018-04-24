@@ -63,7 +63,7 @@ namespace CBMGR.Entity
         /// <summary>
         /// Enum of initialize method.
         /// </summary>
-        private enum InitializeKeyFrom
+        private enum AppKeyInitializeType
         {
             /// <summary>
             /// Initialize key data from email address.
@@ -93,7 +93,7 @@ namespace CBMGR.Entity
             else
             {
                 this.email = email;
-                this.Initialize(InitializeKeyFrom.EMAIL);
+                this.Initialize(AppKeyInitializeType.EMAIL);
                 if (!string.IsNullOrEmpty(this.keyValue))
                 {
                     result.Message = "Email address is exists in key list.";
@@ -133,7 +133,7 @@ namespace CBMGR.Entity
             else
             {
                 this.email = email;
-                if (this.Initialize(InitializeKeyFrom.EMAIL))
+                if (this.Initialize(AppKeyInitializeType.EMAIL))
                 {
                     TimeSpan span = DateTime.Now - this.lastRequired;
                     if (span.Minutes > 10)
@@ -171,7 +171,7 @@ namespace CBMGR.Entity
             else
             {
                 this.email = email;
-                if (this.Initialize(InitializeKeyFrom.EMAIL))
+                if (this.Initialize(AppKeyInitializeType.EMAIL))
                 {
                     TimeSpan span = DateTime.Now - this.lastRequired;
                     if (span.Minutes > 10)
@@ -204,7 +204,7 @@ namespace CBMGR.Entity
         {
             this.keyValue = key;
             this.enabled = false;
-            this.Initialize(InitializeKeyFrom.KEY_VALUE);
+            this.Initialize(AppKeyInitializeType.KEY_VALUE);
             return this.enabled;
         }
         #endregion
@@ -266,12 +266,12 @@ namespace CBMGR.Entity
         /// </summary>
         /// <param name="from">Initialize from</param>
         /// <returns>Wether find key data in database</returns>
-        private bool Initialize(InitializeKeyFrom from)
+        private bool Initialize(AppKeyInitializeType from)
         {
             bool init = false;
             string sql = $"SELECT KEY_ID,KEY_VALUE,EMAIL,CREATE_DATE,LAST_REQUIRED,ENABLED,COMMENT FROM CM_Sys_AppKey WHERE {from}=@PAR";
             IDBHelper dbi = GlobalConfig.IocContainer.Resolve<IDBHelper>();
-            string parValue = from == InitializeKeyFrom.EMAIL ? this.email : this.keyValue;
+            string parValue = from == AppKeyInitializeType.EMAIL ? this.email : this.keyValue;
             SqlParameter par = new SqlParameter("@PAR", parValue);
             DataTable table = dbi.GetDataTable(sql, par);
             if (table != null && table.Rows.Count > 0)
