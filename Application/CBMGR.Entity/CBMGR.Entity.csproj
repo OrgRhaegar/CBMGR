@@ -70,7 +70,7 @@
     <Compile Include="Club.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="LoginToken.cs" />
+    <Compile Include="AppToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AppKey.cs" />
     <Compile Include="UserAccount.cs" />

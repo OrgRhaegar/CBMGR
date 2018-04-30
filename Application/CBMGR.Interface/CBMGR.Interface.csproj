@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionResult.cs" />
+    <Compile Include="IAppToken.cs" />
     <Compile Include="IClub.cs" />
     <Compile Include="IDBHelper.cs" />
     <Compile Include="IGame.cs" />
