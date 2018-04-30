@@ -77,8 +77,6 @@ namespace CBMGR.Entity
                 if (id != null)
                 {
                     string userId = id.ToString();
-                    LoginToken token = new LoginToken(userId);
-                    result.ResultValue = token.GetToken();
                 }
                 else
                 {

@@ -46,7 +46,7 @@ namespace UnityTest
         {
             JObject result =  JsonConvert.DeserializeObject<JObject>(jStr);
             string token = result["ResultValue"].ToString();
-            bool verify = LoginToken.VerifyToken(token);
+            bool verify = AppToken.VerifyToken(token);
             Console.WriteLine("Verify result: {0}", verify);
         }
 
@@ -54,7 +54,7 @@ namespace UnityTest
         {
             JObject result = JsonConvert.DeserializeObject<JObject>(jStr);
             string token = result["ResultValue"].ToString();
-            token = LoginToken.UpdateToken(token).ToJSON();
+            token = AppToken.UpdateToken(token).ToJSON();
             Console.WriteLine(token);
         }
     }

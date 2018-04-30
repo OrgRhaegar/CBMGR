@@ -4,6 +4,7 @@
       <AnalyzerSettings>
         <CollectionProperty Name="Hungarian">
           <Value>i</Value>
+          <Value>o</Value>
           <Value>sb</Value>
           <Value>we</Value>
         </CollectionProperty>
